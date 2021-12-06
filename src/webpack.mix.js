@@ -14,7 +14,7 @@ require('@tinypixelco/laravel-mix-wp-blocks');
 
 mix
   .setPublicPath('./public')
-  .browserSync('talent-bank.demo.beeclover.pro');
+  .browserSync('sampyo_cyberreport.demo.beeclover.pro');
 
 mix
   .sass('resources/styles/app.scss', 'styles')
@@ -31,10 +31,13 @@ mix
   .autoload({ jquery: ['$', 'window.jQuery'] })
   .extract();
 
-mix
-  .copyDirectory('resources/images', 'public/images')
-  .copyDirectory('resources/fonts', 'public/fonts');
-
-mix
-  .sourceMaps()
-  .version();
+if (!mix.inProduction()) {
+  mix.sourceMaps().version();
+  mix.webpackConfig({
+    devtool: 'inline-source-map',
+  });
+} else {
+  mix
+    .copyDirectory('resources/images', 'public/images')
+    .copyDirectory('resources/fonts', 'public/fonts');
+}

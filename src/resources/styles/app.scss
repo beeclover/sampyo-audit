@@ -1,6 +1,10 @@
 @tailwind base;
 
 @import 'common/global';
+@import 'common/wp';
+
+@import 'components/header';
+@import 'components/listDivider';
 
 @tailwind components;
 @tailwind utilities;

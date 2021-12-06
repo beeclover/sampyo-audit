@@ -5804,6 +5804,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"headroom.js@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "headroom.js@npm:0.12.0"
+  checksum: 82b90f48855f2bf7773854baed2cd4c20594c1acd45883813cede796883fd0a13046a4ca340a7dc17d59049094eebf5050e06db2c76b805d1f9830136d080094
+  languageName: node
+  linkType: hard
+
 "hex-color-regex@npm:^1.1.0":
   version: 1.1.0
   resolution: "hex-color-regex@npm:1.1.0"
@@ -10033,6 +10040,7 @@ __metadata:
     browser-sync-webpack-plugin: ^2.3.0
     eslint: ^7.27.0
     eslint-plugin-import: ^2.23.3
+    headroom.js: ^0.12.0
     laravel-mix: ^6.0.19
     postcss: ^8.3.0
     sass: ^1.34.0

@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   mode: 'jit',
   purge: {
@@ -5,8 +7,15 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+    },
     extend: {
       colors: {},
+      fontFamily: {
+        sans: ['"Noto Sans KR"', ...defaultTheme.fontFamily.sans],
+      },
     },
   },
   variants: {
