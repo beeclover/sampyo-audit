@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import Form from '../components/Form.vue';
+import Form from '../components/Form';
 
 const common = {
   containerInit() {},

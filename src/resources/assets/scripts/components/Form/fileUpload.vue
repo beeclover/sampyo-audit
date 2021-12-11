@@ -1,6 +1,6 @@
 <template>
-  <div :id="'file-' + this.index">
-    <div class="opacity-0 inputWrap flex items-center gap-x-[13px]">
+  <div :id="'file-' + this.index" class="hidden">
+    <div class="inputWrap flex items-center gap-x-[13px]">
       <input hidden type="file" :name="'file-' + this.index" accept=".png, .jpg, .jpge, .zip, .pdf, .pptx, .ppt, .xlsx, .webp">
       <div>{{ label }}</div>
       <button  @click.prevent="this.remove" aria-label="remove" class="w-[24px] h-[24px] border border-[#707070] rounded-[2px] bg-white">
@@ -29,10 +29,9 @@ export default {
       const target = document.querySelector(`#file-${this.index}`);
       setTimeout(() => {
         const file = target.querySelector('input');
-        const inputWrap = file.parentElement;
 
         if (file.value.length) {
-          inputWrap.classList.remove('opacity-0');
+          target.classList.remove('hidden');
           file.files[0] && (this.label = file.files[0].name);
           this.loaded();
         } else {
