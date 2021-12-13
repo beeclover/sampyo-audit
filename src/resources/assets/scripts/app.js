@@ -9,6 +9,7 @@ const routes = new Router({
   // All pages
   common: route.common,
   createReport: route.report,
+  signup: route.signup,
 });
 
 jQuery(document).ready(() => {

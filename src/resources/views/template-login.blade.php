@@ -55,32 +55,48 @@
             </div>
           @endif
         </div>
-        @if (!is_user_logged_in())
-          <form name="loginform" id="loginform" action="https://scr.demo.beeclover.pro/wp-login.php" method="post">
-            <div class="grid grid-cols-[1fr,auto] grid-rows-2 gap-x-[9px] gap-y-[3px]">
-              <div class="login-username order-1">
-                <input class="w-full border border-[##9b9b9b] p-[12px]" type="text" name="log" id="user" class="input" size="20" placeholder="아이디">
+        <div class="grid">
+          @if (!is_user_logged_in())
+            <form name="loginform" id="loginform" action="https://scr.demo.beeclover.pro/wp-login.php" method="post" class="order-1">
+              <div class="grid grid-cols-[1fr,auto] grid-rows-2 gap-x-[9px] gap-y-[3px] mb-[16px]">
+                <div class="login-username order-1">
+                  <input class="w-full border border-[#9b9b9b] p-[12px]" type="text" name="log" id="user" class="input" size="20" placeholder="아이디">
+                </div>
+                <div class="login-password order-3">
+                  <input class="w-full border border-[#9b9b9b] p-[12px]" type="password" name="pwd" id="pass" class="input" size="20" placeholder="비밀번호">
+                </div>
+                <div class="login-submit row-span-2 order-2">
+                  <button class="h-full w-[100px] bg-[#1a73c4] text-white font-bold" type="submit" name="wp-submit" id="wp-submit">
+                    로그인
+                  </button>
+                  <input type="hidden" name="redirect_to" value="https://scr.demo.beeclover.pro/login/">
+                </div>
               </div>
-              <div class="login-password order-3">
-                <input class="w-full border border-[##9b9b9b] p-[12px]" type="password" name="pwd" id="pass" class="input" size="20" placeholder="비밀번호">
-              </div>
-              <div class="login-submit row-span-2 order-2">
-                <button class="h-full w-[100px] bg-[#1a73c4] text-white font-bold" type="submit" name="wp-submit" id="wp-submit">
-                  로그인
-                </button>
-                <input type="hidden" name="redirect_to" value="https://scr.demo.beeclover.pro/login/">
-              </div>
+            </form>
+            <div class="prose text-[14px] mt-[50px] text-[color:#a7a7a7] order-3">
+              <ul>
+                <li>
+                  아이디 또는 비밀번호를 잊어버린 경우 로그인하실 수 없습니다.<br/>
+                  제보하기 페이지로 가셔서 다시 제보 내용을 입력해주세요.
+                </li>
+              </ul>
             </div>
-          </form>
-          <div class="prose text-[14px] mt-[50px] text-[color:#a7a7a7]">
-            <ul>
-              <li>
-                아이디 또는 비밀번호를 잊어버린 경우 로그인하실 수 없습니다.<br/>
-                제보하기 페이지로 가셔서 다시 제보 내용을 입력해주세요.
-              </li>
-            </ul>
+          @endif
+          <div class="grid grid-cols-2 gap-[8px] text-[#999999] order-2">
+            <a href="{{ home_url('/') }}" class="border border-[#9b9b9b] py-[8px] text-center hover:text-[#333333] transition-all">
+              홈으로
+            </a>
+            @if (is_user_logged_in())
+              <a href="{!! wp_logout_url() !!}" class="border border-[#9b9b9b] py-[8px] text-center hover:text-[#333333] transition-all">
+                로그아웃
+              </a>
+            @else
+              <a href="/signup" class="border border-[#9b9b9b] py-[8px] text-center hover:text-[#333333] transition-all">
+                회원가입
+              </a>
+            @endif
           </div>
-        @endif
+        </div>
       </div>
     </div>
   </div>
