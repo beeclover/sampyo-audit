@@ -1,0 +1,24 @@
+%basebtn {
+  display: inline-block;
+}
+.btn {
+  @extend %basebtn;
+  @apply focus:ring-0 outline-none focus:outline-none;
+}
+
+@layer components {
+  .btn-lochmara {
+    @extend %basebtn;
+    @apply py-[11px]
+      px-[33px]
+      bg-lochmara-500
+      text-white
+      font-semibold
+      hover:bg-lochmara-900
+      focus:outline-none
+      focus:ring-2
+      focus:ring-lochmara-800
+      focus:ring-opacity-75
+      transition-all;
+  }
+}
