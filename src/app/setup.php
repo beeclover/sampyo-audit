@@ -203,17 +203,6 @@ add_action('widgets_init', function () {
     ] + $config);
 });
 
-// Custom Login page
-add_action('init', function() {
-  $login_page  = home_url( '/login/' );
-  $page_viewed = basename($_SERVER['REQUEST_URI']);
-
-  if( $page_viewed == "wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET') {  
-      wp_redirect($login_page);  
-      exit;
-  }
-});
-
 add_action( 'wp_login_failed', function() {
   $login_page  = home_url( '/login/' );
   wp_redirect( $login_page . '?login=failed' );
@@ -238,19 +227,19 @@ add_action ('wp_loaded', function () {
   if ( $_SERVER['REQUEST_URI'] === '/create-report/' && is_user_logged_in() ) {
     // Check that the nonce was set and valid
     if( isset($_POST['_wpnonce']) && !wp_verify_nonce($_POST['_wpnonce'], 'wps-frontend-post') ) {
-      echo '귀하의 양식이 무효화 된 것으로 보이기 때문에 저장하지 않았습니다. 죄송합니다';
+      // echo '귀하의 양식이 무효화 된 것으로 보이기 때문에 저장하지 않았습니다. 죄송합니다';
       return;
     }
 
     // Stop running function if form wasn't submitted
     if ( !isset($_POST['title']) ) {
-      echo '제목이 설정되어있지 않음';
+      // echo '제목이 설정되어있지 않음';
       return;
     }
 
     // Do some minor form validation to make sure there is content
     if (strlen($_POST['title']) < 3) {
-      echo '제목을 입력하십시오. 제목은 최소한 3 자 이상이어야합니다.';
+      // echo '제목을 입력하십시오. 제목은 최소한 3 자 이상이어야합니다.';
       return;
     }
 
@@ -295,6 +284,11 @@ add_action ('wp_loaded', function () {
     }
 
     $redirect = get_home_url().'/report';
+    wp_redirect($redirect);
+    exit;
+  }
+  if ( $_SERVER['REQUEST_URI'] === '/create-report/' && !is_user_logged_in() ) {
+    $redirect = get_home_url().'/signin';
     wp_redirect($redirect);
     exit;
   }
