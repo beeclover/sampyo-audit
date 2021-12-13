@@ -296,11 +296,10 @@ add_action ('wp_loaded', function () {
 });
 
 add_action('template_redirect', function() {
-  if(!is_user_logged_in() && isset($_GET['do']) && $_GET['do'] == 'register' && isset($_POST['user']) & isset($_POST['password'])):
+  if(!is_user_logged_in() && isset($_GET['do']) && $_GET['do'] == 'register' && isset($_POST['user']) && isset($_POST['password'])):
     $errors = array();
 
     if(empty($_POST['user'])) $errors[] = '사용자 및 이메일을 입력해주세요';
-    if(!empty($_POST['spam'])) $errors[] = 'gtfo spammer';
 
     $user_login = esc_attr($_POST['user']);
     $user_email = esc_attr($_POST['email']);
@@ -310,7 +309,7 @@ add_action('template_redirect', function() {
     $sanitized_user_login = sanitize_user($user_login);
     $user_email = apply_filters('user_registration_email', $user_email);
 
-    if (empty($_POST['email'])):
+    if (empty($_POST['email']) || $_POST['email'] === 'false'):
       $user_email = wp_generate_password( 8 ). '@auto.mate';
     else:
       if(!is_email($user_email)) $errors[] = '잘못된 이메일';
@@ -320,26 +319,21 @@ add_action('template_redirect', function() {
     if(empty($sanitized_user_login) || !validate_username($user_login)) $errors[] = '잘못된 사용자 이름';
     elseif(username_exists($sanitized_user_login)) $errors[] = '사용자 이름이 이미 존재합니다';
 
-    if(empty($sanitized_user_login) || !validate_username($user_login)) $errors[] = '잘못된 사용자 이름';
-
     if(empty($errors)):
       $user_id = wp_create_user($sanitized_user_login, $user_password, $user_email);
 
       if(!$user_id):
         $errors[] = '등록 실패';
       else:
-        update_user_option($user_id, 'default_password_nag', true, true);
-
         // custom field update
         if(!empty($contact = $_POST['contact'])) {
           update_field('contact', $contact, 'user_'.$user_id);
         }
-        if(!empty($name = $_POST['name'])) {
+        if(!empty($name = $_POST['last_name'])) {
           wp_update_user(array(
             'ID' => $user_id,
             'last_name' => $name
           ));
-          $errors[] = $name;
         }
       endif;
     endif;
