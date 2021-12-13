@@ -309,7 +309,7 @@ add_action('template_redirect', function() {
     $sanitized_user_login = sanitize_user($user_login);
     $user_email = apply_filters('user_registration_email', $user_email);
 
-    if (empty($_POST['email']) || $_POST['email'] === 'false'):
+    if (empty($_POST['email'])):
       $user_email = wp_generate_password( 8 ). '@auto.mate';
     else:
       if(!is_email($user_email)) $errors[] = '잘못된 이메일';
