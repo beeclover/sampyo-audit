@@ -223,6 +223,7 @@ add_action('wp_logout', function () {
   exit;
 });
 
+// Create Post
 add_action ('wp_loaded', function () {
   if ( $_SERVER['REQUEST_URI'] === '/create-report/' && is_user_logged_in() ) {
     // Check that the nonce was set and valid
@@ -288,8 +289,55 @@ add_action ('wp_loaded', function () {
     exit;
   }
   if ( $_SERVER['REQUEST_URI'] === '/create-report/' && !is_user_logged_in() ) {
-    $redirect = get_home_url().'/signin';
+    $redirect = get_home_url().'/signup?title=제보하기';
     wp_redirect($redirect);
     exit;
+  }
+});
+
+add_action('template_redirect', function() {
+  if(isset($_GET['do']) && $_GET['do'] == 'register'):
+    $errors = array();
+    if(empty($_POST['user'])) $errors[] = 'provide a user and email';
+    if(!empty($_POST['spam'])) $errors[] = 'gtfo spammer';
+
+    $user_login = esc_attr($_POST['user']);
+    $user_email = esc_attr($_POST['email']);
+    $user_password = esc_attr($_POST['password']);
+    require_once(ABSPATH.WPINC.'/registration.php');
+
+    $sanitized_user_login = sanitize_user($user_login);
+    $user_email = apply_filters('user_registration_email', $user_email);
+
+    if (empty($_POST['email'])):
+      $user_email = wp_generate_password( 8 ). '@auto.mate';
+    else:
+      if(!is_email($user_email)) $errors[] = 'invalid e-mail';
+      elseif(email_exists($user_email)) $errors[] = 'this email is already registered, bla bla...';
+    endif;
+
+    if(empty($sanitized_user_login) || !validate_username($user_login)) $errors[] = 'invalid user name';
+    elseif(username_exists($sanitized_user_login)) $errors[] = 'user name already exists';
+
+    if(empty($sanitized_user_login) || !validate_username($user_login)) $errors[] = 'invalid user name';
+
+    if(empty($errors)):
+      $user_id = wp_create_user($sanitized_user_login, $user_password, $user_email);
+
+      if(!$user_id):
+        $errors[] = 'registration failed...';
+      else:
+        update_user_option($user_id, 'default_password_nag', true, true);
+      endif;
+    endif;
+
+    if(!empty($errors)) define('REGISTRATION_ERROR', serialize($errors));
+    else define('REGISTERED_A_USER', $user_email);
+  endif;
+});
+
+add_action('after_setup_theme', function () {
+  if (!current_user_can('administrator') && !is_admin()) {
+    show_admin_bar(false);
   }
 });
