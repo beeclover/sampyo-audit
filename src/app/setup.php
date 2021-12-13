@@ -296,9 +296,10 @@ add_action ('wp_loaded', function () {
 });
 
 add_action('template_redirect', function() {
-  if(isset($_GET['do']) && $_GET['do'] == 'register'):
+  if(!is_user_logged_in() && isset($_GET['do']) && $_GET['do'] == 'register' && isset($_POST['user']) & isset($_POST['password'])):
     $errors = array();
-    if(empty($_POST['user'])) $errors[] = 'provide a user and email';
+
+    if(empty($_POST['user'])) $errors[] = '사용자 및 이메일을 입력해주세요';
     if(!empty($_POST['spam'])) $errors[] = 'gtfo spammer';
 
     $user_login = esc_attr($_POST['user']);
@@ -312,27 +313,46 @@ add_action('template_redirect', function() {
     if (empty($_POST['email'])):
       $user_email = wp_generate_password( 8 ). '@auto.mate';
     else:
-      if(!is_email($user_email)) $errors[] = 'invalid e-mail';
-      elseif(email_exists($user_email)) $errors[] = 'this email is already registered, bla bla...';
+      if(!is_email($user_email)) $errors[] = '잘못된 이메일';
+      elseif(email_exists($user_email)) $errors[] = '이 이메일은 이미 등록되었습니다.';
     endif;
 
-    if(empty($sanitized_user_login) || !validate_username($user_login)) $errors[] = 'invalid user name';
-    elseif(username_exists($sanitized_user_login)) $errors[] = 'user name already exists';
+    if(empty($sanitized_user_login) || !validate_username($user_login)) $errors[] = '잘못된 사용자 이름';
+    elseif(username_exists($sanitized_user_login)) $errors[] = '사용자 이름이 이미 존재합니다';
 
-    if(empty($sanitized_user_login) || !validate_username($user_login)) $errors[] = 'invalid user name';
+    if(empty($sanitized_user_login) || !validate_username($user_login)) $errors[] = '잘못된 사용자 이름';
 
     if(empty($errors)):
       $user_id = wp_create_user($sanitized_user_login, $user_password, $user_email);
 
       if(!$user_id):
-        $errors[] = 'registration failed...';
+        $errors[] = '등록 실패';
       else:
         update_user_option($user_id, 'default_password_nag', true, true);
+
+        // custom field update
+        if(!empty($contact = $_POST['contact'])) {
+          update_field('contact', $contact, 'user_'.$user_id);
+        }
+        if(!empty($name = $_POST['name'])) {
+          wp_update_user(array(
+            'ID' => $user_id,
+            'last_name' => $name
+          ));
+          $errors[] = $name;
+        }
       endif;
     endif;
 
+
     if(!empty($errors)) define('REGISTRATION_ERROR', serialize($errors));
-    else define('REGISTERED_A_USER', $user_email);
+    else {
+      define('REGISTERED_A_USER', $user_email);
+      wp_signon(array(
+        'user_login' => $sanitized_user_login, 
+        'user_password' => $user_password,
+      ));
+    }
   endif;
 });
 
