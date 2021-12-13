@@ -28,6 +28,8 @@
     "@tailwindcss/line-clamp": "^0.2.2",
     "@tailwindcss/typography": "^0.4.1",
     "@tinypixelco/laravel-mix-wp-blocks": "^1.1.0",
+    "@tiptap/starter-kit": "^2.0.0-beta.153",
+    "@tiptap/vue-3": "^2.0.0-beta.82",
     "@vue/compiler-sfc": "^3.2.24",
     "@wordpress/babel-preset-default": "^6.4.1",
     "@wordpress/browserslist-config": "^2.6.0",
@@ -44,11 +46,12 @@
     "postcss": "^8.3.1",
     "rimraf": "^3.0",
     "sass": "^1.22",
-    "sass-loader": "7.*",
+    "sass-loader": "^12.1.0",
     "stylelint": "^10.1",
     "stylelint-config-standard": "^18.2",
     "vue": "^3.2.24",
     "vue-loader": "^16.8.3",
+    "vue-spinner": "^1.0.4",
     "webpack": "^5.65.0"
   },
   "dependencies": {
