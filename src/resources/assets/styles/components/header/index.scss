@@ -1,7 +1,5 @@
 .header {
-  &__main {
-    @apply border-b border-white border-opacity-25 text-white;
-  }
+  @import 'main';
   @import 'page';
 }
 
