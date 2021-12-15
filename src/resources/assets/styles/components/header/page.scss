@@ -1,0 +1,15 @@
+&__page {
+  @apply relative max-w-[1920px] container h-[350px] overflow-hidden;
+
+  &-body {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 text-white text-center z-10;
+  }
+  &-title {
+    @apply text-[50px] font-black;
+  }
+  &-background {
+    img {
+      @apply absolute top-0 left-0 w-full h-full object-cover;
+    }
+  }
+}

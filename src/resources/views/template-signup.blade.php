@@ -5,7 +5,7 @@
 @extends('layouts.app')
 
 @section('content')
-  @include('partials.page-header')
+  @include('partials.page-header', ['bg' => $bg])
   <div class="container py-[100px] max-w-[1000px]">
     @if (empty(defined('REGISTERED_A_USER')) && !is_user_logged_in())
       <div class="grid grid-cols-[auto,1fr] items-center mb-[30px]">
