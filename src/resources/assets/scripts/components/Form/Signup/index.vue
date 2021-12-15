@@ -72,7 +72,7 @@
           이메일
         </label>
         <div class="flex items-center gap-x-[7px]">
-          <input type="text" name="email" hidden readonly v-model="email" :value="re(email)">
+          <input type="text" name="email" hidden readonly :value="re(email)">
           <input type="text" :value="fEmail" @change="fEmailChange" id="name" :class="`border h-[50px] p-[14px] w-full max-w-[220px] ${email === '' || re(email) ? 'border-[#9b9b9b]' : 'border-[#FA375C]'}`" />
           <span>@</span>
           <input type="text" :value="bEmail" @change="bEmailChange" id="name" :class="`border h-[50px] p-[14px] w-full max-w-[220px] ${email === '' || re(email) ? 'border-[#9b9b9b]' : 'border-[#FA375C]'}`" :readonly="select !== ''" />
