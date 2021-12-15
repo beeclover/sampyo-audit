@@ -1,9 +1,9 @@
 <template>
-  <form id="new_post" name="new_post" method="post" enctype="multipart/form-data" class="text-[14px] py-[14px] border-t border-b border-black">
+  <form id="new_post" name="new_post" method="post" enctype="multipart/form-data" class="text-[14px]">
     <input type="hidden" name="ispost" value="1" />
     <input type="hidden" name="userid" value="" />
     <input hidden type="text" name="content" :value="editor?.getHTML()">
-    <div class="grid grid-cols-[100px,1fr] gap-y-[8px]">
+    <div class="grid grid-cols-[100px,1fr] gap-y-[8px] border-t border-b border-[#333333] py-[14px] mb-[50px]">
       <span class="pt-[14px]">제목</span>
       <div class="pr-[20px]">
         <input type="text" name="title" class="border border-[#9b9b9b] p-[14px] w-full" />
@@ -83,7 +83,10 @@
         </div>
       </div>
     </div>
-    <input type="submit" class="btn btn-primary" value="SUBMIT" name="submitpost" />
+    <div class="flex justify-center gap-x-[5px] text-[16px]">
+      <input type="submit" class="btn-lochmara w-[140px] py-[15px]" value="등록" name="submitpost" />
+      <a href="/report" class="btn w-[140px] py-[15px]">취소</a>
+    </div>
   </form>
 </template>
 
