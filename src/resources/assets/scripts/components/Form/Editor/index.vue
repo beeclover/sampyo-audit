@@ -6,7 +6,7 @@
     <div class="grid grid-cols-[100px,1fr] gap-y-[8px] border-t border-b border-[#333333] py-[14px] mb-[50px]">
       <span class="pt-[14px]">제목</span>
       <div class="pr-[20px]">
-        <input type="text" name="title" class="border border-[#9b9b9b] p-[14px] w-full" />
+        <input type="text" name="title" class="border border-[#9b9b9b] p-[14px] w-full" required />
       </div>
       <div class="col-span-2 h-px bg-[#ebebeb]"></div>
       <span class="pt-[14px]">내용</span>
