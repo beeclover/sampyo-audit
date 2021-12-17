@@ -224,7 +224,14 @@ add_action('wp_logout', function () {
   exit;
 });
 
-// Create Post
+
+/**
+ * Create Report
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
 add_action ('wp_loaded', function () {
   if ( $_SERVER['REQUEST_URI'] === '/create-report/' && is_user_logged_in() ) {
     // Check that the nonce was set and valid
@@ -296,6 +303,13 @@ add_action ('wp_loaded', function () {
   }
 });
 
+/**
+ * register 가입 프로세스
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
 add_action('template_redirect', function() {
   if(!is_user_logged_in() && isset($_GET['do']) && $_GET['do'] == 'register' && isset($_POST['user']) && isset($_POST['password'])):
     $errors = array();
@@ -351,11 +365,26 @@ add_action('template_redirect', function() {
   endif;
 });
 
+/**
+ * 관리자를 제외하고 모두 어드민 바 비활성화
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
 add_action('after_setup_theme', function () {
   if (!current_user_can('administrator') && !is_admin()) {
     show_admin_bar(false);
   }
 });
+
+
+/**
+ * 포스트 제목에 비공개 라벨 제거
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
 
 add_filter('the_title', function ($title) {
   $title = str_replace('Private: ', '', $title);
