@@ -2,4 +2,8 @@ import common from './common';
 import report from './report';
 import signup from './signup';
 
-export { common, report, signup };
+export default {
+  common,
+  createReport: report,
+  signup,
+};
