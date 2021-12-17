@@ -27,6 +27,7 @@ class Report extends Composer
           'contact' => get_the_author_meta('contact'),
           'name' => get_the_author_meta('last_name'),
           'files' => $this->getFiles(),
+          'answer' => $this->getAnswer(),
         ];
     }
 
@@ -42,5 +43,16 @@ class Report extends Composer
         return $result;
       }
       return [];
+    }
+
+    public function getAnswer()
+    {
+      $comments = get_comments(array (
+        'post_id' => get_the_ID(),
+      ));
+      if (!empty($comments)) {
+        return $comments[count($comments) - 1];
+      }
+      return '';
     }
 }
