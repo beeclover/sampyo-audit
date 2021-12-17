@@ -3,7 +3,6 @@
 namespace App\View\Composers;
 
 use Roots\Acorn\View\Composer;
-use function Roots\view;
 
 class Report extends Composer
 {
@@ -13,8 +12,7 @@ class Report extends Composer
      * @var array
      */
     protected static $views = [
-        'template-report',
-        'template-signup',
+        'archive-report',
     ];
 
     /**
@@ -25,7 +23,6 @@ class Report extends Composer
     public function override()
     {
         return [
-            'bg' => view('partials.img', ['ex' => 'jpg', 'name' => 'header-02'])
         ];
     }
 }
