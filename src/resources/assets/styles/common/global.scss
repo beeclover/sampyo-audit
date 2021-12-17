@@ -15,10 +15,14 @@ body {
     min-height: 100vh;
     @apply grid grid-rows-[1fr,auto];
   }
+}
 
-  a:hover {
-    @apply text-lochmara-500;
-  }
+[x-cloak] {
+  display: none !important;
+}
+
+a:hover {
+  @apply text-lochmara-500;
 }
 
 .brand {

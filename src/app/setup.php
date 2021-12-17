@@ -406,3 +406,29 @@ add_action ('wp_loaded', function () {
     exit;
   }
 });
+
+/**
+ * 코멘트 업데이트
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
+add_action ('wp_loaded', function () {
+  if ( isset($_POST['action']) && is_user_logged_in() && current_user_can('administrator' && $_POST['action'] === 'editedcomment') ) {
+    if( !isset($_POST['comment_ID'])) {
+      return;
+    }
+    
+    if ( !isset($_POST['comment']) ) {
+      return;
+    }
+
+    wp_update_comment(array(
+      'comment_ID' => $_POST['comment_ID'],
+      'comment_content' => $_POST['comment']
+    ));
+    wp_redirect($_POST['request']);
+    exit;
+  }
+});

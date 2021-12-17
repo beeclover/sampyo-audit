@@ -3,14 +3,9 @@ import 'jquery';
 import Alpine from 'alpinejs';
 
 import Router from './util/router';
-import * as route from './routes';
+import route from './routes';
 
-const routes = new Router({
-  // All pages
-  common: route.common,
-  createReport: route.report,
-  signup: route.signup,
-});
+const routes = new Router(route);
 
 jQuery(document).ready(() => {
   routes.loadEvents();

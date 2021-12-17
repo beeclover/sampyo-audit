@@ -1,5 +1,11 @@
 import common from './common';
-import report from './report';
+import createReport from './createReport';
 import signup from './signup';
+import singleReport from './singleReport';
 
-export { common, report, signup };
+export default {
+  common,
+  createReport,
+  signup,
+  singleReport,
+};
