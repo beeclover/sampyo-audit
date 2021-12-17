@@ -249,7 +249,7 @@ add_action ('wp_loaded', function () {
     $post = array(
       'post_title'    => $_POST['title'],
       'post_content'  => $_POST['content'],
-      'post_status'   => 'waiting',   // Could be: publish
+      'post_status'   => 'private',   // Could be: publish
       'post_type' 	=> 'report' // Could be: `page` or your CPT
     );
     $new_post = wp_insert_post($post);
@@ -355,4 +355,10 @@ add_action('after_setup_theme', function () {
   if (!current_user_can('administrator') && !is_admin()) {
     show_admin_bar(false);
   }
+});
+
+add_filter('the_title', function ($title) {
+  $title = str_replace('Private: ', '', $title);
+  $title = str_replace('비공개: ', '', $title);
+  return $title;
 });
