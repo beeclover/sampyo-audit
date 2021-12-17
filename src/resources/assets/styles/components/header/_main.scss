@@ -1,0 +1,12 @@
+&__main {
+  @apply border-b border-white border-opacity-25 text-white transition-all;
+
+  @mixin dark {
+    @apply bg-white text-mineShaft-500 border-mineShaft-100;
+  }
+
+  &.shrink,
+  &:hover {
+    @include dark;
+  }
+}

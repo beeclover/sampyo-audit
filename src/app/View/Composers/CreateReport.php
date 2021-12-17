@@ -3,8 +3,9 @@
 namespace App\View\Composers;
 
 use Roots\Acorn\View\Composer;
+use function Roots\view;
 
-class Report extends Composer
+class CreateReport extends Composer
 {
     /**
      * List of views served by this composer.
@@ -12,7 +13,8 @@ class Report extends Composer
      * @var array
      */
     protected static $views = [
-        'archive-report',
+        'template-report',
+        'template-signup',
     ];
 
     /**
@@ -23,6 +25,7 @@ class Report extends Composer
     public function override()
     {
         return [
+            'bg' => view('partials.img', ['ex' => 'jpg', 'name' => 'header-02'])
         ];
     }
 }

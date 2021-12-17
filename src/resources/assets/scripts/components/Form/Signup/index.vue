@@ -171,6 +171,9 @@ export default {
       this.email = this.fEmail + '@' + this.bEmail;
     },
     re(email) {
+      if (email === '') {
+        return;
+      }
       const result = String(email).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
       if (result === null) {
         return false;

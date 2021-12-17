@@ -24,6 +24,7 @@ add_action('wp_enqueue_scripts', function () {
     }
 
     wp_enqueue_style('sage/app.css', asset('styles/app.css')->uri(), false, null);
+    wp_enqueue_style('fontello', asset('fonts/fontello/css/fontello.css')->uri(), false, null);
 }, 100);
 
 /**
@@ -223,7 +224,14 @@ add_action('wp_logout', function () {
   exit;
 });
 
-// Create Post
+
+/**
+ * Create Report
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
 add_action ('wp_loaded', function () {
   if ( $_SERVER['REQUEST_URI'] === '/create-report/' && is_user_logged_in() ) {
     // Check that the nonce was set and valid
@@ -248,7 +256,7 @@ add_action ('wp_loaded', function () {
     $post = array(
       'post_title'    => $_POST['title'],
       'post_content'  => $_POST['content'],
-      'post_status'   => 'waiting',   // Could be: publish
+      'post_status'   => 'private',   // Could be: publish
       'post_type' 	=> 'report' // Could be: `page` or your CPT
     );
     $new_post = wp_insert_post($post);
@@ -294,6 +302,13 @@ add_action ('wp_loaded', function () {
     exit;
   }
 });
+
+/**
+ * register 가입 프로세스
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
 
 add_action('template_redirect', function() {
   if(!is_user_logged_in() && isset($_GET['do']) && $_GET['do'] == 'register' && isset($_POST['user']) && isset($_POST['password'])):
@@ -350,8 +365,44 @@ add_action('template_redirect', function() {
   endif;
 });
 
+/**
+ * 관리자를 제외하고 모두 어드민 바 비활성화
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
 add_action('after_setup_theme', function () {
   if (!current_user_can('administrator') && !is_admin()) {
     show_admin_bar(false);
+  }
+});
+
+
+/**
+ * 포스트 제목에 비공개 라벨 제거
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
+add_filter('the_title', function ($title) {
+  $title = str_replace('Private: ', '', $title);
+  $title = str_replace('비공개: ', '', $title);
+  return $title;
+});
+
+/**
+ * 로그인 하지 않은 유저
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
+add_action ('wp_loaded', function () {
+  if ( strpos($_SERVER['REQUEST_URI'], 'report') && !is_user_logged_in() ) {
+    $redirect = get_home_url().'/login';
+    wp_redirect($redirect);
+    exit;
   }
 });
