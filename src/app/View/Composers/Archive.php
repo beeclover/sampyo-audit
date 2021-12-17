@@ -34,7 +34,7 @@ class Archive extends Composer
     public function getCount()
     {
       if ($type = get_post_type()) {
-        $count = wp_count_posts($type)->publish;
+        $count = $GLOBALS['wp_query']->found_posts;
         $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
         $paged = $paged - 1;
         $posts_per_page = get_option( 'posts_per_page' );
