@@ -391,3 +391,18 @@ add_filter('the_title', function ($title) {
   $title = str_replace('비공개: ', '', $title);
   return $title;
 });
+
+/**
+ * 로그인 하지 않은 유저
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
+add_action ('wp_loaded', function () {
+  if ( strpos($_SERVER['REQUEST_URI'], 'report') && !is_user_logged_in() ) {
+    $redirect = get_home_url().'/login';
+    wp_redirect($redirect);
+    exit;
+  }
+});
