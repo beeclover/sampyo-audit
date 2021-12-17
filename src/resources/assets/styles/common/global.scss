@@ -17,6 +17,10 @@ body {
   }
 }
 
+[x-cloak] {
+  display: none !important;
+}
+
 a:hover {
   @apply text-lochmara-500;
 }

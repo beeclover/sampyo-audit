@@ -17,6 +17,12 @@
       "css": "right-open-big",
       "code": 59393,
       "src": "entypo"
+    },
+    {
+      "uid": "41087bc74d4b20b55059c60a33bf4008",
+      "css": "edit",
+      "code": 59394,
+      "src": "fontawesome"
     }
   ]
 }
