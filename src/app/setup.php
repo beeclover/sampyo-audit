@@ -460,7 +460,23 @@ add_action('init', function() {
 
 add_action('template_redirect', function() {
   if(current_user_can('administrator') && isset($_POST['status']) && isset($_POST['post_id'])):
-    $status = $_POST['status'] === '처리중' ? 'waiting' : 'processing';
-    update_field('status', $status, $_POST['post_id']);
+    $post_id = $_POST['post_id'];
+
+    $status = match ($_POST['status']) {
+      '처리중' => 'waiting',
+      '대기중' => 'processing',
+      '답변완료' => 'remove',
+    };
+    if ($status === 'remove'):
+      $comments = get_comments(array(
+        'post_id' => $post_id,
+      ));
+      foreach($comments as $comment) {
+        wp_delete_comment($comment->comment_ID);
+      }
+      $status = 'processing';
+    endif;
+
+    update_field('status', $status, $post_id);
   endif;
-}); 
+});

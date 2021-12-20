@@ -60,11 +60,17 @@
         </span>
       
         @if (preg_match("/[대기중|처리중]/", $status = get_field('status', get_the_ID())))
-          <form action="{!! get_the_permalink() !!}" method="post">
+          <form action="{!! get_the_permalink() !!}" method="post" class="m-0">
             <input type="hidden" name="post_id" value="{!! get_the_ID() !!}">
             <input type="hidden" name="status" value="{!! $status !!}">
             <button type="submit" class="btn px-[8px] py-[4px] font-normal">
-              <i class="icon-exchange"></i> @if ($status === '대기중') 처리중 @else 대기중 @endif
+              @if ($status === '처리중') 
+                <i class="icon-exchange"></i> 대기중
+              @elseif($status === '대기중')
+                <i class="icon-exchange"></i> 처리중 
+              @else
+                <i class="icon-trash-empty"></i> 답변삭제
+              @endif
             </button>
           </form>
         @endif
