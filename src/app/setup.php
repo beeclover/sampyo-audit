@@ -432,3 +432,28 @@ add_action ('wp_loaded', function () {
     exit;
   }
 });
+
+
+/**
+ * 코멘트 html 허용
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
+add_action('init', function() {
+  global $allowedtags;
+  $allowedtags['pre'] = array('class'=>array());
+  $allowedtags['p'] = array('class'=>array());
+  $allowedtags['code'] = array('class'=>array());
+  $allowedtags['strong'] = array('class'=>array());
+  $allowedtags['href'] = array('class'=>array());
+  $allowedtags['h1'] = array('class'=>array());
+  $allowedtags['h2'] = array('class'=>array());
+  $allowedtags['h3'] = array('class'=>array());
+  $allowedtags['h4'] = array('class'=>array());
+  $allowedtags['h5'] = array('class'=>array());
+  $allowedtags['h6'] = array('class'=>array());
+  $allowedtags['ul'] = array('class'=>array());
+  $allowedtags['li'] = array('class'=>array());
+},11);
