@@ -1,25 +1,25 @@
 <article @php(post_class())>
   <div class="container max-w-[1000px]">
     <div class="grid grid-cols-[170px,1fr] text-[14px] items-center border-t border-b border-mineShaft-500 mb-[60px]">
-      <div class="h-[60px] flex items-center self-start">
+      <div class="min-h-[60px] flex items-center self-start">
         <div class="px-[24px] font-medium">제목</div>
       </div>
       <div>{!! $title !!}</div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
   
-      <div class="h-[60px] flex items-center self-start">
+      <div class="min-h-[60px] flex items-center self-start">
         <div class="px-[24px] font-medium">성명</div>
       </div>
       <div>{!! $name !!}</div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
   
-      <div class="h-[60px] flex items-center self-start">
+      <div class="min-h-[60px] flex items-center self-start">
         <div class="px-[24px] font-medium">연락처</div>
       </div>
       <div>{!! $contact !!}</div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
   
-      <div class="h-[60px] flex items-center self-start">
+      <div class="min-h-[60px] flex items-center self-start">
         <div class="px-[24px] font-medium">이메일 주소</div>
       </div>
       <div>{!! $email !!}</div>
@@ -33,10 +33,10 @@
       </div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
   
-      <div class="h-[60px] flex items-center self-start">
+      <div class="h-full max-h-[120px] min-h-[60px] flex items-center self-start">
         <div class="px-[24px] font-medium">첨부파일</div>
       </div>
-      <div class="prose prose-sm">
+      <div class="prose prose-sm py-[20px]">
         <ul>
           @foreach ($files as $file)
             <li>
@@ -51,7 +51,7 @@
       </div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
   
-      <div class="h-[60px] flex items-center self-start">
+      <div class="min-h-[60px] flex items-center self-start">
         <div class="px-[24px] font-medium">답변여부</div>
       </div>
       <div>{!! get_field('status', get_the_ID()) !!}</div>
