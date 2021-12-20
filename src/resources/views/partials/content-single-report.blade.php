@@ -61,19 +61,19 @@
         <div class="h-full flex self-start bg-[#f5f5f5] py-[36px]">
           <div class="max-h-[90px] min-h-[60px] px-[24px] font-medium">답변내용</div>
         </div>
-        <div x-data="{editor: false}" class="prose prose-sm bg-[#f5f5f5] min-h-[500px] relative overflow-hidden py-[34px]">
+        <div x-data="{editor: false}" class="prose prose-sm bg-[#f5f5f5] min-h-[300px] relative overflow-hidden py-[34px]">
           @if (!empty($answer))
+            <div class="max-w-[90%] prose prose-sm ProseMirror !border-none !p-0 !min-h-0 transition-all !whitespace-normal" :class="{'mb-[100px] opacity-0': editor}">
+              {!! $answer->comment_content !!}
+            </div>
+          @endif
+          @if (current_user_can('administrator'))
             <div class="absolute right-0 top-0 text-[20px] flex group">
               <button @click.prevent="editor=!editor" class="relative z-10 group-hover:text-white transition-all w-[32px] h-[32px] flex items-center justify-center">
                 <i class="icon-edit"></i>
               </button>
               <div class="absolute w-[88px] h-[88px] rotate-45 bg-mineShaft-200 group-hover:bg-lochmara-500 transition-all -translate-x-1/2 -translate-y-1/2 right-0 left-full"></div>
             </div>
-            <div class="max-w-[90%] prose prose-sm ProseMirror !border-none !p-0 !min-h-0 transition-all !whitespace-normal" :class="{'mb-[100px] opacity-0': editor}">
-              {!! $answer->comment_content !!}
-            </div>
-          @endif
-          @if (current_user_can('administrator'))
             <div 
             x-show="editor"
             x-cloak
