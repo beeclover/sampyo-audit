@@ -61,7 +61,7 @@
         <div class="h-full flex self-start bg-[#f5f5f5] py-[36px]">
           <div class="max-h-[90px] min-h-[60px] px-[24px] font-medium">답변내용</div>
         </div>
-        <div x-data="{editor: false}" class="prose prose-sm bg-[#f5f5f5] min-h-[300px] relative overflow-hidden py-[34px]">
+        <div x-data="{editor: false}" x-effect="bodyScrollLock(editor)" class="prose prose-sm bg-[#f5f5f5] min-h-[300px] relative overflow-hidden py-[34px]">
           @if (!empty($answer))
             <div class="max-w-[90%] prose prose-sm ProseMirror !border-none !p-0 !min-h-0 transition-all !whitespace-normal">
               {!! $answer->comment_content !!}
@@ -84,7 +84,7 @@
               x-transition:enter-end="opacity-100"
               x-transition:leave-start="opacity-100"
               x-transition:leave-end="opacity-0"
-              class="prose prose-sm bg-white max-w-[720px] w-[90%] fixed position-center z-[9010]">
+              class="prose prose-sm bg-white max-w-[720px] w-[90%] max-h-[80%] fixed position-center z-[9010] overflow-y-auto">
               @if (!empty($answer))
               <form method="post" id="" class="comment-form">
                 <p class="hidden">
@@ -98,7 +98,6 @@
                 <p class="form-submit hidden">
                   <input type="hidden" name="comment_post_ID" value="{!! get_the_ID() !!}" id="comment_post_ID">
                   <input type="hidden" name="comment_parent" id="comment_parent" value="0">
-                  <input type="hidden" id="_wp_unfiltered_html_comment_disabled" name="_wp_unfiltered_html_comment" value="08076aa9ac"><script>(function(){if(window===window.parent){document.getElementById('_wp_unfiltered_html_comment_disabled').name='_wp_unfiltered_html_comment';}})();</script>
                 </p>
               @endif
                 <div id="form">
