@@ -33,10 +33,7 @@ const colors = {
 
 module.exports = {
   mode: 'jit',
-  purge: {
-    content: ['./app/**/*.php', './resources/**/*.{php,vue,js}'],
-  },
-  darkMode: false, // or 'media' or 'class'
+  content: ['./app/**/*.php', './resources/**/*.{php,vue,js}'],
   theme: {
     container: {
       center: true,
