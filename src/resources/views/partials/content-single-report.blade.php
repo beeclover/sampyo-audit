@@ -128,6 +128,7 @@
             </div>
           @endif
         </div>
+        <div class="col-span-2 mb-[50px]"></div>
       @endif
     </div>
     <div class="text-center">
