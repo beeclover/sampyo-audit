@@ -54,7 +54,21 @@
       <div class="min-h-[60px] flex items-center self-start">
         <div class="px-[24px] font-medium">답변여부</div>
       </div>
-      <div>{!! get_field('status', get_the_ID()) !!}</div>
+      <div class="flex justify-between items-center gap-x-[16px]">
+        <span>
+          {!! get_field('status', get_the_ID()) !!}
+        </span>
+      
+        @if (preg_match("/[대기중|처리중]/", $status = get_field('status', get_the_ID())))
+          <form action="{!! get_the_permalink() !!}" method="post">
+            <input type="hidden" name="post_id" value="{!! get_the_ID() !!}">
+            <input type="hidden" name="status" value="{!! $status !!}">
+            <button type="submit" class="btn px-[8px] py-[4px] font-normal">
+              <i class="icon-exchange"></i> @if ($status === '대기중') 처리중 @else 대기중 @endif
+            </button>
+          </form>
+        @endif
+      </div>
 
       @if (!empty($answer) || current_user_can('administrator'))
         <div class="h-px bg-mineShaft-100 col-span-2 mb-[40px]"></div>
