@@ -63,7 +63,7 @@
         </div>
         <div x-data="{editor: false}" class="prose prose-sm bg-[#f5f5f5] min-h-[300px] relative overflow-hidden py-[34px]">
           @if (!empty($answer))
-            <div class="max-w-[90%] prose prose-sm ProseMirror !border-none !p-0 !min-h-0 transition-all !whitespace-normal" :class="{'mb-[100px] opacity-0': editor}">
+            <div class="max-w-[90%] prose prose-sm ProseMirror !border-none !p-0 !min-h-0 transition-all !whitespace-normal">
               {!! $answer->comment_content !!}
             </div>
           @endif
@@ -74,15 +74,17 @@
               </button>
               <div class="absolute w-[88px] h-[88px] rotate-45 bg-mineShaft-200 group-hover:bg-lochmara-500 transition-all -translate-x-1/2 -translate-y-1/2 right-0 left-full"></div>
             </div>
+            <div id="bgMask" class="fixed top-0 bottom-0 left-0 right-0 w-full h-full bg-black opacity-50 z-[9010]" x-cloak x-show="editor"></div>
             <div 
-            x-show="editor"
-            x-cloak
-            x-transition:enter="transition ease-out delay-600 duration-300"
-            x-transition:enter-start="opacity-0 transform scale-90"
-            x-transition:enter-end="opacity-100 transform scale-100"
-            x-transition:leave-start="opacity-100 transform scale-100"
-            x-transition:leave-end="opacity-0 transform scale-90"
-            class="max-w-[90%] w-full prose prose-sm absolute z-10 top-[34px] bg-white">
+              x-show="editor"
+              x-cloak
+              @click.away="editor = false"
+              x-transition:enter="transition ease-out delay-600 duration-300"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"
+              class="prose prose-sm bg-white max-w-[720px] w-[90%] fixed position-center z-[9010]">
               @if (!empty($answer))
               <form method="post" id="" class="comment-form">
                 <p class="hidden">
