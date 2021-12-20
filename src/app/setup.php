@@ -457,3 +457,10 @@ add_action('init', function() {
   $allowedtags['ul'] = array('class'=>array());
   $allowedtags['li'] = array('class'=>array());
 },11);
+
+add_action('template_redirect', function() {
+  if(current_user_can('administrator') && isset($_POST['status']) && isset($_POST['post_id'])):
+    $status = $_POST['status'] === '처리중' ? 'waiting' : 'processing';
+    update_field('status', $status, $_POST['post_id']);
+  endif;
+}); 
