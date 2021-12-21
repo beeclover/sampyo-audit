@@ -1,9 +1,5 @@
 .env
 mysql
-wp-content/cache
-wp-content/languages
-wp-content/plugins
-wp-content/themes
-wp-content/upgrade
-wp-content/uploads
-wp-content/index.php
+wp-content/**/*
+!wp-content/mu-plugins/subdir-loader.php
+!wp-content/uploads/.htaccess
