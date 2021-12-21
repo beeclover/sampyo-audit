@@ -30,12 +30,11 @@
         <div>
           <input 
             type="password" 
-            name="password-check" 
-            id="password-check" 
+            name="password-check"
+            id="password-check"
             @change="changePassword2"
-            :value="password2 !== password ? null : password2" 
+            :value="password2"
             :class="`border h-[50px] p-[14px] w-full max-w-[625px] ${password2 !== password ? 'border-[#FA375C] placeholder-[#FA375C]' : 'border-[#9b9b9b]'}`" 
-            :placeholder="password2 !== password ? '비밀번호가 일치하지 않습니다.' : ''"
             required
           />
         </div>
@@ -76,7 +75,7 @@
           <input type="text" :value="fEmail" @change="fEmailChange" id="name" :class="`border h-[50px] p-[14px] w-full max-w-[220px] ${email === '' || re(email) ? 'border-[#9b9b9b]' : 'border-[#FA375C]'}`" />
           <span>@</span>
           <input type="text" :value="bEmail" @change="bEmailChange" id="name" :class="`border h-[50px] p-[14px] w-full max-w-[220px] ${email === '' || re(email) ? 'border-[#9b9b9b]' : 'border-[#FA375C]'}`" :readonly="select !== ''" />
-          <select @change="bEmailChange" class="border border-[#9b9b9b] h-[50px] px-[14px] py-[8px]">
+          <select @change="bEmailChange" class="border border-[#9b9b9b] h-[50px] px-[14px] py-[8px] pr-[40px]">
             <option value="">직접입력하기</option>
             <option value="naver.com">naver.com</option>
             <option value="gmail.com">gmail.com</option>
@@ -130,14 +129,20 @@
       </div>
       <div class="pb-[36px] border-b border-black mb-[60px]">
         <div class="flex items-center gap-x-[12px]">
-          <input type="checkbox" name="privacy-policy" id="privacy-policy" class="w-auto" required>
+          <input type="checkbox" name="privacy-policy" id="privacy-policy" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" required>
           <label for="privacy-policy" class="cursor-pointer">
             <span>약관에 동의합니다.</span>
           </label>
         </div>
       </div>
-      <div class="flex justify-center">
-        <button type="submit" class="btn bg-[#818286] py-[11px] w-[140px] text-center text-white font-bold text-[16px]">다음</button>
+      <div class="flex flex-col items-center">
+        <button type="submit" class="btn bg-[#818286] py-[11px] w-[140px] text-center text-white font-bold text-[16px]" :disabled="finish">다음</button>
+        <div class="mt-[20px] prose">
+          <ul>
+            <li v-if="4 > password.length && !finish">비밀번호가 너무 짧습니다. 4자리이상으로 설정해주세요</li>
+            <li v-if="password !== password2">비밀번호가 일치하지 않습니다.</li>
+          </ul>
+        </div>
       </div>
     </section>
   </form>
@@ -157,16 +162,15 @@ export default {
       email: '',
       password: '',
       password2: '',
+      finish: true,
     }
   },
   methods: {
     bEmailChange(e) {
-      console.log(e.target.value);
       this.bEmail = e.target.value;
       this.email = this.fEmail + '@' + this.bEmail;
     },
     fEmailChange(e) {
-      console.log(e.target.value);
       this.fEmail = e.target.value;
       this.email = this.fEmail + '@' + this.bEmail;
     },
@@ -183,9 +187,13 @@ export default {
     },
     changePassword(e) {
       this.password = e.target.value;
+      4 < password.length ? this.finish = true : this.finish = false;
     },
     changePassword2(e) {
       this.password2 = e.target.value;
+      if (4 < password.length) {
+        this.password === this.password2 ? this.finish = false : this.finish = true;
+      }
     },
   },
 }

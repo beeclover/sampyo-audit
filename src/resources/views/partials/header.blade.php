@@ -13,7 +13,12 @@
       </svg>
     </a>
   
-    <nav class="nav-primary">
+    <nav class="nav-primary flex gap-x-[54px]">
+      @if (is_user_logged_in())
+      <div>
+        <a href="{!! wp_logout_url() !!}">로그아웃</a>
+      </div>
+      @endif
       {!! wp_nav_menu(['menu' => 0, 'menu_class' => 'flex gap-x-[54px]', 'echo' => false]) !!}
     </nav>
   </div>

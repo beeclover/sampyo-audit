@@ -317,6 +317,10 @@ add_action('template_redirect', function() {
   if(!is_user_logged_in() && isset($_GET['do']) && $_GET['do'] == 'register' && isset($_POST['user']) && isset($_POST['password'])):
     $errors = array();
 
+    if(empty($_POST['password']) || count($_POST['password']) <= 4) {
+      $errors[] = '비밀번호가 너무 짧습니다. 4자리이상으로 설정해주세요';
+    }
+
     if(empty($_POST['user'])) $errors[] = '사용자 및 이메일을 입력해주세요';
 
     $user_login = esc_attr($_POST['user']);

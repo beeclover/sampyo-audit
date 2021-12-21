@@ -82,20 +82,6 @@
               </ul>
             </div>
           @endif
-          <div class="grid grid-cols-2 gap-[8px] text-[#999999] order-2">
-            <a href="{{ home_url('/') }}" class="border border-[#9b9b9b] py-[8px] text-center hover:text-[#333333] transition-all">
-              홈으로
-            </a>
-            @if (is_user_logged_in())
-              <a href="{!! wp_logout_url() !!}" class="border border-[#9b9b9b] py-[8px] text-center hover:text-[#333333] transition-all">
-                로그아웃
-              </a>
-            @else
-              <a href="/signup" class="border border-[#9b9b9b] py-[8px] text-center hover:text-[#333333] transition-all">
-                회원가입
-              </a>
-            @endif
-          </div>
         </div>
       </div>
     </div>
