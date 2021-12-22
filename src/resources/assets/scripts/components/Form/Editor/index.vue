@@ -84,8 +84,23 @@
       </div>
     </div>
     <div class="flex justify-center gap-x-[5px] text-[16px]">
-      <input type="submit" class="btn-lochmara w-[140px] py-[15px]" value="등록" name="submitpost" />
+      <button class="btn-lochmara w-[140px] py-[15px]" @click.prevent="submit">등록</button>
       <a href="/report" class="btn w-[140px] py-[15px]">취소</a>
+    </div>
+    <div v-if="checkSubmit">
+      <div id="bgMask" class="fixed top-0 bottom-0 left-0 right-0 w-full h-full bg-black opacity-50 z-[9010]"></div>
+      <div v-click-away="onClickAway" class="fixed max-w-[90%] lg:max-w-[720px] max-h-full w-full bg-white md:rounded shadow-2xl transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-[40px] overflow-y-auto z-[9020]">
+        <div class="prose mb-[20px]">
+          <p>
+            제보내용은 등록이 완료되면 수정할 수 없습니다.<br/>
+            등록을 완료하시겠습니까?
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-x-[5px]">
+          <input type="submit" class="btn-lochmara py-[15px] cursor-pointer" value="확인" name="submitpost" />
+          <button class="btn py-[15px]" @click.prevent="cancel">취소</button>
+        </div>
+      </div>
     </div>
   </form>
 </template>
@@ -95,6 +110,7 @@ import { markRaw } from 'vue'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import fileUpload from './fileUpload.vue'
+import { directive } from "vue3-click-away";
 
 export default {
   name: 'Editor',
@@ -108,7 +124,12 @@ export default {
       editor: null,
       components: [],
       uploading: false,
+      checkSubmit: false,
     }
+  },
+
+  directives: {
+    ClickAway: directive
   },
 
   mounted() {
@@ -138,6 +159,15 @@ export default {
     },
     remove (index) {
       this.components.splice(index, 1);
+    },
+    submit () {
+      this.checkSubmit = true;
+    },
+    cancel() {
+      this.checkSubmit = false;
+    },
+    onClickAway() {
+      this.checkSubmit = false;
     }
   },
 }
