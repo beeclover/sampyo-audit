@@ -55,7 +55,7 @@
         <div class="px-[24px] font-medium">답변여부</div>
       </div>
       <div class="flex justify-between items-center gap-x-[16px]">
-        <span>
+        <span class="@if(get_field('status', get_the_ID()) === '답변완료') text-lochmara-500 @endif">
           {!! get_field('status', get_the_ID()) !!}
         </span>
       

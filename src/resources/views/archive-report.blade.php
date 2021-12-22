@@ -30,7 +30,7 @@
                 <a href="{{ get_permalink() }}">{{ get_the_title() }}</a>
               </div>
               <div class="justify-self-center">{{ get_the_date('Y.m.d') }}</div>
-              <div class="justify-self-center">{{ get_field('status', get_the_ID()) }}</div>
+              <div class="justify-self-center @if(get_field('status', get_the_ID()) === '답변완료') text-lochmara-500 @endif">{{ get_field('status', get_the_ID()) }}</div>
               <div class="h-[60px]"></div>
               @php($count--)
             </div>
