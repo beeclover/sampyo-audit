@@ -7,7 +7,7 @@ on:
 jobs:
   Auto-Cerate-PR:
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'beeclover/sampyo-cyberreport' }}
+    if: ${{ github.repository == 'beeclover/sampyo-audit' }}
     steps:
       - name: Extract branch name
         shell: bash
