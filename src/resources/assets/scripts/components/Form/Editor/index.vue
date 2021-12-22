@@ -162,12 +162,15 @@ export default {
     },
     submit () {
       this.checkSubmit = true;
+      window.bodyScrollLock(true);
     },
     cancel() {
       this.checkSubmit = false;
+      window.bodyScrollLock(false);
     },
     onClickAway() {
       this.checkSubmit = false;
+      window.bodyScrollLock(false);
     }
   },
 }

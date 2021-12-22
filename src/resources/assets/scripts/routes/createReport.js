@@ -11,8 +11,11 @@ const common = {
     const url = new URL(window.location.href);
     const search = url.searchParams;
     const posting = search.get('posting');
-    if (posting === 'done') {
+    const postlink = search.get('postlink');
+    if (posting === 'done' && postlink) {
+      Alpine.store('bodyScrollLock', true);
       Alpine.store('posting', true);
+      Alpine.store('postlink', postlink);
     }
   },
   finalize() {

@@ -1,4 +1,4 @@
-<header id="global" class="header__main">
+<header id="global" class="header__main" :class="{'pr-[15px]': $store.bodyScrollLock}">
   <div class="container max-w-[1920px] xl:px-[50px] flex justify-between items-center h-[100px]">
     <a class="brand" href="{{ home_url('/') }}">
       <svg class="fill-[#0086ce]" width="148.659" height="26.512" viewBox="0 0 148.659 26.512">

@@ -1,18 +1,20 @@
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import Alpine from 'alpinejs';
 
 function bodyScrollLock(boolean) {
-  const body = document.querySelector('body');
-  const header = document.querySelector('header#global');
+  Alpine.store('bodyScrollLock', boolean);
+  const ar = [
+    document.querySelector('body'),
+    document.querySelector('#global'),
+  ];
   const options = {
     reserveScrollBarGap: true,
   };
-  if (boolean) {
-    disableBodyScroll(body, options);
-    disableBodyScroll(header, options);
-  } else {
-    enableBodyScroll(body, options);
-    enableBodyScroll(header, options);
-  }
+  ar.forEach((el) =>
+    el && boolean
+      ? disableBodyScroll(el, options)
+      : enableBodyScroll(el, options)
+  );
 }
 
 export { bodyScrollLock };

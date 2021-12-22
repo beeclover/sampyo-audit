@@ -1,10 +1,12 @@
-<div x-data>
+<div
+  x-effect="bodyScrollLock($store.bodyScrollLock)"
+>
   <div x-cloak x-show="$store.posting" id="bgMask" class="fixed top-0 bottom-0 left-0 right-0 w-full h-full bg-black opacity-50 z-[9010]"></div>
   <section id="modal" class="flex items-center justify-center">
     <div 
       class="fixed max-w-[90%] lg:max-w-[500px] max-h-full w-full bg-white md:rounded shadow-2xl transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-[40px] overflow-y-auto z-[9020]"
       x-show="$store.posting"
-      @click.away="$store.posting = false"
+      @click.away="$store.posting = false; $store.bodyScrollLock = false"
       x-cloak
       x-transition:enter="transition ease-out duration-300"
       x-transition:enter-start="opacity-0 transform scale-90"
