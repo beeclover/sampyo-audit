@@ -40,7 +40,7 @@
         <ul>
           @foreach ($files as $file)
             <li>
-              @if (current_user_can('administrator'))
+              @if (current_user_can('moderate_comments'))
                 <a href="{!! $file['url'] !!}">{!! $file['name'] !!}</a>
               @else
                 {!! $file['name'] !!}
@@ -59,7 +59,7 @@
           {!! get_field('status', get_the_ID()) !!}
         </span>
       
-        @if (current_user_can('administrator') && preg_match("/[대기중|처리중]/", $status = get_field('status', get_the_ID())))
+        @if (current_user_can('moderate_comments') && preg_match("/[대기중|처리중]/", $status = get_field('status', get_the_ID())))
           <form action="{!! get_the_permalink() !!}" method="post" class="m-0">
             <input type="hidden" name="post_id" value="{!! get_the_ID() !!}">
             <input type="hidden" name="status" value="{!! $status !!}">
@@ -76,7 +76,7 @@
         @endif
       </div>
 
-      @if (!empty($answer) || current_user_can('administrator'))
+      @if (!empty($answer) || current_user_can('moderate_comments'))
         <div class="h-px bg-mineShaft-100 col-span-2 mb-[40px]"></div>
         <div class="h-full flex self-start bg-[#f5f5f5] py-[36px]">
           <div class="max-h-[90px] min-h-[60px] px-[24px] font-medium">답변내용</div>
@@ -87,7 +87,7 @@
               {!! $answer->comment_content !!}
             </div>
           @endif
-          @if (current_user_can('administrator'))
+          @if (current_user_can('moderate_comments'))
             <div class="absolute right-0 top-0 text-[20px] flex group">
               <button @click.prevent="editor=!editor" class="relative z-10 group-hover:text-white transition-all w-[32px] h-[32px] flex items-center justify-center">
                 <i class="icon-edit"></i>

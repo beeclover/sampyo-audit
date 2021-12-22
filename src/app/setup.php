@@ -400,7 +400,7 @@ add_action('template_redirect', function() {
  **/
 
 add_action('after_setup_theme', function () {
-  if (!current_user_can('administrator') && !is_admin()) {
+  if (!current_user_can('edit_users')) {
     show_admin_bar(false);
   }
 });
@@ -442,7 +442,7 @@ add_action ('wp_loaded', function () {
  **/
 
 add_action ('wp_loaded', function () {
-  if ( isset($_POST['action']) && is_user_logged_in() && current_user_can('administrator' && $_POST['action'] === 'editedcomment') ) {
+  if ( isset($_POST['action']) && is_user_logged_in() && current_user_can('moderate_comments' && $_POST['action'] === 'editedcomment') ) {
     if( !isset($_POST['comment_ID'])) {
       return;
     }
@@ -486,7 +486,7 @@ add_action('init', function() {
 },11);
 
 add_action('template_redirect', function() {
-  if(current_user_can('administrator') && isset($_POST['status']) && isset($_POST['post_id'])):
+  if(current_user_can('moderate_comments') && isset($_POST['status']) && isset($_POST['post_id'])):
     $post_id = $_POST['post_id'];
 
     $status = match ($_POST['status']) {

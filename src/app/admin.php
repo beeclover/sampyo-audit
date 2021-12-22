@@ -46,5 +46,6 @@ if (function_exists('acf_add_options_sub_page')) {
   acf_add_options_sub_page(array(
   'page_title'   => 'options',
   'menu_title'   => 'options',
+  'capability'   => 'edit_users'
 ));
 }
