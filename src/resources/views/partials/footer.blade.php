@@ -9,4 +9,5 @@
       © 2021 SAMPYO GROUP.  All Rights Reserved.
     </span>
   </div>
+  @include('partials.modal')
 </footer>

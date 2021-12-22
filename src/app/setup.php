@@ -290,12 +290,14 @@ add_action ('wp_loaded', function () {
             // Update the repeater field
             update_field($field_key, $repeater_value, $new_post );
         }
-      }
+    }
 
-      // default status 대기중
-      update_field('status', 'waiting', $new_post);
+    // default status 대기중
+    update_field('status', 'waiting', $new_post);
 
-    $redirect = get_home_url().'/report';
+    $link = get_the_permalink($new_post);
+    
+    $redirect = get_home_url().'/create-report?posting=done&postlink='.$link;
     wp_redirect($redirect);
     exit;
   }
