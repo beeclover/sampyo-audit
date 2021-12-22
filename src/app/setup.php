@@ -296,7 +296,25 @@ add_action ('wp_loaded', function () {
     update_field('status', 'waiting', $new_post);
 
     $link = get_the_permalink($new_post);
-    
+
+    // 작성완료시 관리자에게 알림 이메일
+    $nt = get_field('notification_targets', 'options');
+    if ($nt) {
+      $targets = array_map(function($user) {
+        $user = $user['user'];
+        return $user->user_email;
+      }, $nt);
+      wp_mail( 
+        $targets,
+        '[사이버감사실] 새로운 제보내용 등록 알림', 
+        <<<EOD
+        사이버감사실 알림 시스템입니다.
+        사이버 감사실에 새로운 제보내용이 등록되었습니다.
+        확인 바랍니다.
+  
+        해당글 바로가기 - $link
+EOD);
+    }
     $redirect = get_home_url().'/create-report?posting=done&postlink='.$link;
     wp_redirect($redirect);
     exit;

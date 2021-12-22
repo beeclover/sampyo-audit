@@ -34,3 +34,17 @@ add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
 add_action('customize_preview_init', function () {
     wp_enqueue_script('sage/customizer.js', asset('scripts/customizer.js')->uri(), ['customize-preview'], null, true);
 });
+
+/**
+ * ACF Options 활성화
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
+if (function_exists('acf_add_options_sub_page')) {
+  acf_add_options_sub_page(array(
+  'page_title'   => 'options',
+  'menu_title'   => 'options',
+));
+}
