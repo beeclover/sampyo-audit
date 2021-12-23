@@ -3,7 +3,7 @@
 @section('content')
   @include('partials.header-report')
 
-  <div class="container py-[100px] max-w-[1000px]">
+  <div class="container py-[60px] lg:py-[100px] max-w-[1000px]">
     @while(have_posts()) @php(the_post())
       @includeFirst(['partials.content-single-' . get_post_type(), 'partials.content-single'])
     @endwhile

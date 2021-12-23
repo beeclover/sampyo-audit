@@ -1,32 +1,32 @@
 <article @php(post_class())>
-  <div class="container max-w-[1000px]">
-    <div class="grid grid-cols-[170px,1fr] text-[14px] items-center border-t border-b border-mineShaft-500 mb-[60px]">
+  <div class="lg:container max-w-[1000px] overflow-x-hidden">
+    <div class="grid grid-cols-[100px,1fr] lg:grid-cols-[170px,1fr] text-[14px] items-center border-t border-b border-mineShaft-500 mb-[60px]">
       <div class="min-h-[60px] flex items-center self-start">
-        <div class="px-[24px] font-medium">제목</div>
+        <div class="px-[8px] lg:px-[24px] font-medium">제목</div>
       </div>
       <div>{!! $title !!}</div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
   
       <div class="min-h-[60px] flex items-center self-start">
-        <div class="px-[24px] font-medium">성명</div>
+        <div class="px-[8px] lg:px-[24px] font-medium">성명</div>
       </div>
       <div>{!! $name !!}</div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
   
       <div class="min-h-[60px] flex items-center self-start">
-        <div class="px-[24px] font-medium">연락처</div>
+        <div class="px-[8px] lg:px-[24px] font-medium">연락처</div>
       </div>
       <div>{!! $contact !!}</div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
   
       <div class="min-h-[60px] flex items-center self-start">
-        <div class="px-[24px] font-medium">이메일 주소</div>
+        <div class="px-[8px] lg:px-[24px] font-medium">이메일 주소</div>
       </div>
       <div>{!! $email !!}</div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
   
       <div class="h-full max-h-[120px] min-h-[60px] flex items-center self-start">
-        <div class="px-[24px] font-medium">내용</div>
+        <div class="px-[8px] lg:px-[24px] font-medium">내용</div>
       </div>
       <div class="prose prose-sm py-[36px]">
         @php(the_content())
@@ -34,7 +34,7 @@
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
   
       <div class="h-full max-h-[120px] min-h-[60px] flex items-center self-start">
-        <div class="px-[24px] font-medium">첨부파일</div>
+        <div class="px-[8px] lg:px-[24px] font-medium">첨부파일</div>
       </div>
       <div class="prose prose-sm py-[20px]">
         <ul>
@@ -52,7 +52,7 @@
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
   
       <div class="min-h-[60px] flex items-center self-start">
-        <div class="px-[24px] font-medium">답변여부</div>
+        <div class="px-[8px] lg:px-[24px] font-medium">답변여부</div>
       </div>
       <div class="flex justify-between items-center gap-x-[16px]">
         <span class="@if(get_field('status', get_the_ID()) === '답변완료') text-lochmara-500 @endif">
@@ -78,21 +78,21 @@
 
       @if (!empty($answer) || current_user_can('moderate_comments'))
         <div class="h-px bg-mineShaft-100 col-span-2 mb-[40px]"></div>
-        <div class="h-full flex self-start bg-[#f5f5f5] py-[36px]">
-          <div class="max-h-[90px] min-h-[60px] px-[24px] font-medium">답변내용</div>
+        <div class="col-span-2 lg:col-span-1 h-full flex self-start bg-[#f5f5f5] pt-[16px] lg:py-[36px]">
+          <div class="max-h-[90px] lg:min-h-[60px] px-[20px] lg:px-[24px] font-medium">답변내용</div>
         </div>
-        <div x-data="{editor: false}" x-effect="bodyScrollLock(editor)" class="prose prose-sm bg-[#f5f5f5] min-h-[300px] relative overflow-hidden py-[34px]">
+        <div x-data="{editor: false}" x-effect="bodyScrollLock(editor)" class="col-span-2 lg:col-span-1 prose prose-sm bg-[#f5f5f5] min-h-[300px] relative lg:overflow-hidden px-[20px] lg:px-[24px] py-[34px]">
           @if (!empty($answer))
             <div class="max-w-[90%] prose prose-sm ProseMirror !border-none !p-0 !min-h-0 transition-all !whitespace-normal">
               {!! $answer->comment_content !!}
             </div>
           @endif
           @if (current_user_can('moderate_comments'))
-            <div class="absolute right-0 top-0 text-[20px] flex group">
+            <div class="absolute right-0 top-[-37px] lg:top-0 text-[20px] flex group">
               <button @click.prevent="editor=!editor" class="relative z-10 group-hover:text-white transition-all w-[32px] h-[32px] flex items-center justify-center">
                 <i class="icon-edit"></i>
               </button>
-              <div class="absolute w-[88px] h-[88px] rotate-45 bg-mineShaft-200 group-hover:bg-lochmara-500 transition-all -translate-x-1/2 -translate-y-1/2 right-0 left-full"></div>
+              <div class="absolute w-[88px] h-[88px] rotate-45 bg-mineShaft-200 group-hover:bg-lochmara-500 transition-all -translate-x-1/2 -translate-y-1/2 right-0 left-full" style="clip-path: polygon(50% 50%, 100% 100%, 0% 100%);"></div>
             </div>
             <div id="bgMask" class="fixed top-0 bottom-0 left-0 right-0 w-full h-full bg-black opacity-50 z-[9010]" x-cloak x-show="editor"></div>
             <div 
