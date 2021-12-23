@@ -1,6 +1,6 @@
-<header id="global" :class="{'pr-[15px]': $store.bodyScrollLock}">
-  <div class="container max-w-[1920px] xl:px-[50px] flex justify-between items-center h-[100px] header__main">
-    <a class="brand" href="{{ home_url('/') }}">
+<header id="global" :class="{'lg:pr-[15px]': $store.bodyScrollLock, 'transform-none active': $store.mobileMenu.on}">
+  <div class="header__main" :class="{'active': $store.mobileMenu.on}">
+    <a href="{{ home_url('/') }}">
       <svg class="logo" width="148.659" height="28.664" viewBox="0 0 148.659 28.664">
         <g transform="translate(-50.743 -35.229)">
           <path d="m941.859 735.594 4.588-19.74-11.441 19.337H930.5l-.545-19.337-6.076 19.74h-5.311l8.2-24.591h7.765l.37 16.071L944.456 711h8.1l-5.064 24.591z" transform="translate(-819.7 -673.138)"/>
@@ -13,13 +13,45 @@
       </svg>
     </a>
   
-    <nav class="nav-primary flex gap-x-[54px]">
-      @if (is_user_logged_in())
-      <div>
+    <div class="hidden lg:block">
+      <nav class="nav-primary flex gap-x-[54px]">
+        @if (is_user_logged_in())
+        <div>
+          <a href="{!! wp_logout_url() !!}">로그아웃</a>
+        </div>
+        @endif
+        {!! wp_nav_menu(['menu' => 0, 'menu_class' => 'flex gap-x-[54px]', 'echo' => false]) !!}
+      </nav>
+    </div>
+    <div class="block lg:hidden">
+      <button class="btn-menu lg:hidden focus:outline-none ml-4 transform scale-75"
+        x-on:click.prevent="$store.mobileMenu.toggle()"
+        :class="{'active' : $store.mobileMenu.on}"
+      >
+        <svg viewBox="0 0 64 48">
+            <path d="M19,15 L45,15 C70,15 58,-2 49.0177126,7 L19,37"></path>
+            <path d="M31,24 L45,24 C61.2371586,24 57,49 41,33 L32,24"></path>
+            <path d="M45,33 L19,33 C-8,33 6,-2 22,14 L45,37"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div
+    x-show="$store.mobileMenu.on"
+    x-cloak
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 transform scale-90"
+    x-transition:enter-end="opacity-100 transform scale-100"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100 transform scale-100"
+    x-transition:leave-end="opacity-0 transform scale-90"
+    class="block lg:hidden w-screen h-screen fixed top-0 left-0 pt-[var(--h-main)] bg-white z-[9000] text-mineShaft-500"
+  >
+    {!! $mnb !!}
+    @if (is_user_logged_in())
+      <div class="pl-[20px] border-b border-mineShaft-100 h-[50px] flex items-center">
         <a href="{!! wp_logout_url() !!}">로그아웃</a>
       </div>
-      @endif
-      {!! wp_nav_menu(['menu' => 0, 'menu_class' => 'flex gap-x-[54px]', 'echo' => false]) !!}
-    </nav>
+    @endif
   </div>
 </header>
