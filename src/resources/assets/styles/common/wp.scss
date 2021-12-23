@@ -21,7 +21,7 @@ body.admin-bar {
     min-height: calc(100vh - var(--wp-bar, 0px));
   }
 
-  header.header__main {
+  header#global {
     top: var(--wp-bar, 0px);
   }
 }

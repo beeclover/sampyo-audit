@@ -10,7 +10,7 @@
     <div class="container grid place-content-center py-[60px] lg:py-[100px]">
       <div class="max-w-[480px]">
         @if (is_user_logged_in())
-          <div class="text-center py-[16px] rounded-[4px] bg-[#0CA1F7] text-white">
+          <div class="text-center p-[16px] rounded-[4px] bg-[#0CA1F7] text-white">
             <div class="text-xl font-bold">
               로그인 성공
             </div>
@@ -27,7 +27,7 @@
         @endif
         <div class="mb-[30px]">
           @if (($login = (isset($_GET['login']) ) ? $_GET['login'] : 0) === "failed")
-            <div class="text-center py-[16px] rounded-[4px] bg-[#FA375C] text-white">
+            <div class="text-center p-[16px] rounded-[4px] bg-[#FA375C] text-white">
               <div class="text-xl font-bold">
                 로그아웃 실패
               </div>
@@ -36,7 +36,7 @@
               </div>
             </div>
           @elseif($login === "false")
-            <div class="text-center py-[16px] rounded-[4px] bg-[#0CA1F7] text-white">
+            <div class="text-center p-[16px] rounded-[4px] bg-[#0CA1F7] text-white">
               <div class="text-xl font-bold">
                 로그아웃 성공
               </div>
@@ -45,7 +45,7 @@
               </div>
             </div>
           @elseif($login === "empty")
-            <div class="text-center py-[16px] rounded-[4px] bg-[#FFC73C] text-white">
+            <div class="text-center p-[16px] rounded-[4px] bg-[#FFC73C] text-white">
               <div class="text-xl font-bold">
                 사용자 이름 및 / 또는 암호가 비어 있습니다
               </div>
