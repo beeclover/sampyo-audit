@@ -41,7 +41,7 @@
           @foreach ($files as $file)
             <li>
               @if (current_user_can('moderate_comments'))
-                <a href="{!! $file['url'] !!}">{!! $file['name'] !!}</a>
+                <a href="{!! $file['url'] !!}" download>{!! $file['name'] !!}</a>
               @else
                 {!! $file['name'] !!}
               @endif
@@ -123,7 +123,7 @@
                 <div id="form">
                   <vue-form @if (!empty($answer)) content="{{ $answer->comment_content }}" @endif></vue-form>
                 </div>
-                <input name="submit" type="submit" id="submit" class="submit btn" value="@if (!empty($answer))답변수정@else 제출@endif"> 
+                <input name="submit" type="submit" id="submit" class="submit btn cursor-pointer" value="@if (!empty($answer))답변수정@else 제출@endif"> 
               </form>
             </div>
           @endif
@@ -133,6 +133,7 @@
     </div>
     <div class="text-center">
       <a href="/report/?title=처리결과%20확인" class="btn">목록으로</a>
+      <a href="javascript:window.print();" class="btn">출력하기</a>
     </div>
   </div>
 </article>

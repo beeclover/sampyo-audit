@@ -29,10 +29,10 @@
           @if (($login = (isset($_GET['login']) ) ? $_GET['login'] : 0) === "failed")
             <div class="text-center p-[16px] rounded-[4px] bg-[#FA375C] text-white">
               <div class="text-xl font-bold">
-                로그아웃 실패
+                로그인 실패
               </div>
               <div class="text-sm">
-                로그아웃이 실패되었습니다.
+                로그인이 실패되었습니다.
               </div>
             </div>
           @elseif($login === "false")

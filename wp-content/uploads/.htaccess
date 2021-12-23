@@ -1,6 +1,8 @@
-# Disable access to all file types except the following
-Order deny,allow
-Deny from all
 <Files ~ ".(xml|css|js|jpe?g|png|gif|pdf|docx|rtf|odf|zip|rar)$">
-Allow from 175.198.253.75
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI} !^/wp-content/uploads/2021/12/cropped-favicon.png$
+# RewriteCond %{REMOTE_ADDR}  !175.210.226.167
+
+RewriteRule (.*) https://%{HTTP_HOST}/404 [L]
 </Files>
