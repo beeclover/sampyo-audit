@@ -47,13 +47,10 @@ mix.options({
 
 mix.purgeCss();
 
-if (!mix.inProduction()) {
-  // Assets
-  mix
-    .copyDirectory(src`images`, 'public/images')
-    .copyDirectory(src`fonts`, 'public/fonts');
-  mix.sourceMaps().version();
-  mix.webpackConfig({
-    devtool: 'inline-source-map',
-  });
-}
+mix.sourceMaps().version();
+mix.webpackConfig({
+  devtool: 'inline-source-map',
+});
+mix
+  .copyDirectory(src`images`, 'public/images')
+  .copyDirectory(src`fonts`, 'public/fonts');
