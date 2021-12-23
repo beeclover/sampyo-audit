@@ -1,0 +1,37 @@
+@at-root {
+  :root {
+    --h-main: 60px;
+
+    @media (min-width: theme('screens.lg')) {
+      --h-main: 100px;
+    }
+  }
+}
+
+&__main {
+  @apply border-b border-white border-opacity-25 text-white transition-all container max-w-[1920px] xl:px-[50px] flex justify-between items-center h-[var(--h-main)];
+  position: relative;
+  z-index: 9010;
+
+  .logo {
+    @apply fill-white;
+    height: 18px;
+    width: auto;
+    @media (min-width: theme('screens.lg')) {
+      height: auto;
+    }
+  }
+
+  @mixin dark {
+    @apply bg-white text-mineShaft-500 border-mineShaft-100;
+    .logo {
+      @apply fill-lochmara-500;
+    }
+  }
+
+  &.shrink,
+  &:hover,
+  &.active {
+    @include dark;
+  }
+}

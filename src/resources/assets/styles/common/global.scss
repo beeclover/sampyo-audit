@@ -1,0 +1,40 @@
+:root {
+  --container-px: 16px;
+  @media (min-width: theme('screens.md')) {
+    --container-px: 20px;
+  }
+  @media (min-width: theme('screens.lg')) {
+    --container-px: 2rem;
+  }
+}
+
+html {
+  @media (max-width: theme('screens.lg')) {
+    font-size: 14px;
+  }
+}
+
+body {
+  @apply font-sans;
+
+  #app {
+    min-height: 100vh;
+    @apply grid grid-rows-[1fr,auto];
+  }
+}
+
+* {
+  word-break: keep-all;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+a:hover {
+  @apply text-lochmara-500;
+}
+
+.brand {
+  @apply text-3xl font-medium text-indigo-500;
+}

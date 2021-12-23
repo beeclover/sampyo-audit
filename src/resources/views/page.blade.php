@@ -3,6 +3,10 @@
 @section('content')
   @while(have_posts()) @php(the_post())
     @include('partials.page-header')
-    @includeFirst(['partials.content-page', 'partials.content'])
+    <div class="container py-[100px] max-w-[1000px]">
+      <div class="prose">
+        @includeFirst(['partials.content-'. get_post_type(), 'partials.content-page', 'partials.content'])
+      </div>
+    </div>
   @endwhile
 @endsection

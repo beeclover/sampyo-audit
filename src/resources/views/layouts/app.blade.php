@@ -1,20 +1,9 @@
-<div class="max-w-3xl mx-auto">
-
-  <a class="sr-only focus:not-sr-only" href="#main">
-    {{ __('Skip to content') }}
-  </a>
-
-  @include('partials.header')
-
-    <main id="main" class="py-8 prose main">
-      @yield('content')
-    </main>
-
-    @hasSection('sidebar')
-      <aside class="sidebar">
-        @yield('sidebar')
-      </aside>
-    @endif
-
-  @include('partials.footer')
+@include('partials.header')
+<div class="layouts__content">
+  @yield('content')
 </div>
+@include('partials.footer')
+
+{{-- 
+  !mt-0 h-[250px] !m-0 grid-rows-[100px,1fr] self-end border-l !my-[90px] text-mineShaft-400
+  --}}
