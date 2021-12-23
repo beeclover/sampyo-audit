@@ -1,14 +1,14 @@
 <template>
   <form method="post" :action="this.action" class="text-[14px] text-[#333333]">
     <section class="mb-[60px]">
-      <div class="grid grid-cols-[120px,1fr] items-center gap-y-[8px] gap-x-[25px] py-[14px] border-t border-b border-black">
+      <div class="grid grid-cols-1 lg:grid-cols-[120px,1fr] items-center gap-y-[8px] gap-x-[25px] py-[14px] border-t border-b border-black">
         <label for="user">
           <span class="required"></span>아이디
         </label>
         <div>
           <input type="text" name="user" value="" id="user" class="border border-[#9b9b9b] h-[50px] p-[14px] w-full max-w-[625px]" required />
         </div>
-        <div class="col-span-2 h-px bg-[#ebebeb]"></div>
+        <div class="hidden lg:block col-span-2 h-px bg-[#ebebeb]"></div>
         <label for="password">
           <span class="required"></span>비밀번호
         </label>
@@ -23,7 +23,7 @@
             required 
           />
         </div>
-        <div class="col-span-2 h-px bg-[#ebebeb]"></div>
+        <div class="hidden lg:block col-span-2 h-px bg-[#ebebeb]"></div>
         <label for="password-check">
           <span class="required"></span>비밀번호 확인
         </label>
@@ -38,8 +38,8 @@
             required
           />
         </div>
-        <div class="col-span-2 h-px bg-[#ebebeb]"></div>
-        <div class="col-span-2">
+        <div class="hidden lg:block col-span-2 h-px bg-[#ebebeb]"></div>
+        <div class="lg:col-span-2">
           <div class="py-[14px] text-[#f83131]">
             아이디 또는 비밀번호를 잊어버리면 다시 로그인 할 수 없으니 잘 기억해주세요.
           </div>
@@ -47,46 +47,48 @@
       </div>
     </section>
     <section class="mb-[51px]">
-      <div class="flex justify-between items-end gap-x-[20px]">
+      <div class="flex flex-wrap justify-between items-end gap-x-[20px] gap-y-[8px]">
         <span class="text-[20px] font-bold">선택 내용 입력</span>
         <span class="text-[#999999]">필수입력 사항은 아니며, 미입력시 보상에서 제외됩니다.</span>
       </div>
-      <div class="grid grid-cols-[120px,1fr] items-center gap-y-[8px] gap-x-[25px] py-[14px]">
-        <div class="col-span-2 h-px bg-[#ebebeb]"></div>
+      <div class="grid grid-cols-1 lg:grid-cols-[120px,1fr] items-center gap-y-[8px] gap-x-[25px] py-[14px]">
+        <div class="lg:col-span-2 h-px bg-[#ebebeb]"></div>
         <label for="name">
           성명
         </label>
         <div>
           <input type="text" name="last_name" value="" id="name" class="border border-[#9b9b9b] h-[50px] p-[14px] w-full max-w-[220px]" />
         </div>
-        <div class="col-span-2 h-px bg-[#ebebeb]"></div>
+        <div class="hidden lg:block col-span-2 h-px bg-[#ebebeb]"></div>
         <label for="contact">
           연락처
         </label>
         <div>
           <input type="text" name="contact" value="" id="contact" class="border border-[#9b9b9b] h-[50px] p-[14px] w-full max-w-[220px]" placeholder="‘-‘ 없이 숫자만 입력해주세요." />
         </div>
-        <div class="col-span-2 h-px bg-[#ebebeb]"></div>
+        <div class="hidden lg:block col-span-2h-px bg-[#ebebeb]"></div>
         <label for="name">
           이메일
         </label>
-        <div class="flex items-center gap-x-[7px]">
+        <div class="flex items-center gap-[7px] flex-wrap">
           <input type="text" name="email" hidden readonly :value="re(email)">
-          <input type="text" :value="fEmail" @change="fEmailChange" id="name" :class="`border h-[50px] p-[14px] w-full max-w-[220px] ${email === '' || re(email) ? 'border-[#9b9b9b]' : 'border-[#FA375C]'}`" />
-          <span>@</span>
-          <input type="text" :value="bEmail" @change="bEmailChange" id="name" :class="`border h-[50px] p-[14px] w-full max-w-[220px] ${email === '' || re(email) ? 'border-[#9b9b9b]' : 'border-[#FA375C]'}`" :readonly="select !== ''" />
+          <div class="flex items-center gap-x-[7px]">
+            <input type="text" :value="fEmail" @change="fEmailChange" id="name" :class="`border h-[50px] p-[14px] w-full max-w-[220px] ${email === '' || re(email) ? 'border-[#9b9b9b]' : 'border-[#FA375C]'}`" />
+            <span>@</span>
+            <input type="text" :value="bEmail" @change="bEmailChange" id="name" :class="`border h-[50px] p-[14px] w-full max-w-[220px] ${email === '' || re(email) ? 'border-[#9b9b9b]' : 'border-[#FA375C]'}`" :readonly="select !== ''" />
+          </div>
           <select @change="bEmailChange" class="border border-[#9b9b9b] h-[50px] px-[14px] py-[8px] pr-[40px]">
             <option value="">직접입력하기</option>
             <option value="naver.com">naver.com</option>
             <option value="gmail.com">gmail.com</option>
           </select>
         </div>
-        <div class="col-span-2 h-px bg-[#ebebeb]"></div>
+        <div class="hidden lg:block col-span-2 h-px bg-[#ebebeb]"></div>
       </div>
     </section>
     <section>
       <div class="text-[20px] font-bold mb-[20px]">선택 내용 입력</div>
-      <div class="overflow-y-auto h-[300px] p-[44px] overflow-hidden border border-[#707070] mb-[20px]">
+      <div class="overflow-y-auto h-[300px] p-[12px] lg:p-[44px] overflow-hidden border border-[#707070] mb-[20px]">
         <div class="prose">
           <div>
             ■ 개인정보의 수집 및 이용목적
