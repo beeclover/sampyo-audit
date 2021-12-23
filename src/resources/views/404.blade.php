@@ -4,7 +4,6 @@
   @include('partials.page-header')
   
   <div class="container py-[100px] max-w-[1000px]">
-    @php(var_dump($_SERVER['REMOTE_ADDR']))
     @if (! have_posts())
       <div class="mb-[28px]">
         <img src="{!! get_theme_file_uri('resources/assets/images/not-found.jpg') !!}" alt="" class="max-w-[90%] sm:max-w-[600px] mx-auto">
