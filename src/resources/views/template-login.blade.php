@@ -7,8 +7,8 @@
 @section('content')
   <div class="h-full grid grid-rows-[auto,1fr]">
     @include('partials.page-header')
-    <div class="container grid place-content-center py-[100px]">
-      <div class="w-[480px]">
+    <div class="container grid place-content-center py-[60px] lg:py-[100px]">
+      <div class="max-w-[480px]">
         @if (is_user_logged_in())
           <div class="text-center py-[16px] rounded-[4px] bg-[#0CA1F7] text-white">
             <div class="text-xl font-bold">
@@ -76,7 +76,9 @@
             <div class="prose text-[14px] mt-[50px] text-[color:#a7a7a7] order-3">
               <ul>
                 <li>
-                  아이디 또는 비밀번호를 잊어버린 경우 로그인하실 수 없습니다.<br/>
+                  아이디 또는 비밀번호를 잊어버린 경우 로그인하실 수 없습니다.
+                </li>
+                <li>
                   제보하기 페이지로 가셔서 다시 제보 내용을 입력해주세요.
                 </li>
               </ul>
