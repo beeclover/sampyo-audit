@@ -24,14 +24,15 @@
       </div>
       <div>{!! $email !!}</div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
-  
-      <div class="h-full max-h-[120px] min-h-[60px] flex items-center self-start">
-        <div class="px-[8px] lg:px-[24px] font-medium">내용</div>
-      </div>
-      <div class="prose prose-sm py-[36px]">
-        @php(the_content())
-      </div>
-      <div class="h-px bg-mineShaft-100 col-span-2"></div>
+      @if (current_user_can('moderate_comments'))
+        <div class="h-full max-h-[120px] min-h-[60px] flex items-center self-start">
+          <div class="px-[8px] lg:px-[24px] font-medium">내용</div>
+        </div>
+        <div class="prose prose-sm py-[36px]">
+          @php(the_content())
+        </div>
+        <div class="h-px bg-mineShaft-100 col-span-2"></div>
+      @endif
   
       <div class="h-full max-h-[120px] min-h-[60px] flex items-center self-start">
         <div class="px-[8px] lg:px-[24px] font-medium">첨부파일</div>
@@ -133,7 +134,9 @@
     </div>
     <div class="text-center">
       <a href="/report/?title=처리결과%20확인" class="btn">목록으로</a>
-      <a href="javascript:window.print();" class="btn">출력하기</a>
+      @if (current_user_can('moderate_comments'))
+        <a href="javascript:window.print();" class="btn">출력하기</a>
+      @endif
     </div>
   </div>
 </article>
