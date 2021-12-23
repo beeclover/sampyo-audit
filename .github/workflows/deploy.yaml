@@ -40,7 +40,7 @@ jobs:
           cd ${{ secrets.SRC }}
           yarn set version berry
           yarn install
-          yarn build:production
+          yarn build
 
       - name: 📂 Sync files to Server
         uses: AEnterprise/rsync-deploy@v1.0
