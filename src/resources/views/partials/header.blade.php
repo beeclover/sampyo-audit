@@ -1,25 +1,57 @@
-<header id="global" class="header__main" :class="{'pr-[15px]': $store.bodyScrollLock}">
-  <div class="container max-w-[1920px] xl:px-[50px] flex justify-between items-center h-[100px]">
-    <a class="brand" href="{{ home_url('/') }}">
-      <svg class="fill-[#0086ce]" width="148.659" height="26.512" viewBox="0 0 148.659 26.512">
-        <g transform="translate(-1177.387 -368.41)">
-            <path d="M1256.61 381.314c-3.149-.866-4.188-1.334-4.188-2.741 0-1.3 1.072-2.236 2.857-2.236 2.889 0 3.636 1.407 3.8 2.633h6.688c-.162-3.787-2.792-7.755-10.453-7.755-6.363 0-10.355 3.354-10.355 8.477 0 3.535 2.045 5.555 8.148 7.286 3.473 1.01 4.188 1.767 4.188 3.138 0 1.8-1.526 2.417-3.572 2.417-2.759 0-4.09-1.3-4.383-3.21h-6.817c.422 5.447 4.123 8.4 10.875 8.4 7.4 0 11.427-3.535 11.427-8.585-.002-3.568-1.725-6.021-8.215-7.824z" transform="translate(-65.134 -2.804)"/>
-            <path d="m1286.01 372.064-13.05 25.358h7.337l2.532-4.869h8.6l.65 4.869h7.109l-3.96-25.358zm-.616 14.825c1.85-4 3.408-7.467 4.22-9.631h.1c.13 2.128.52 5.627 1.039 9.631z" transform="translate(-74.913 -3.077)"/>
-            <path d="M1338.177 372.064h-3.7c-2.532 5.7-5.454 12.445-6.785 16.051h-.033c.1-3.318-.195-10.533-.422-16.051h-9.761l-4.837 25.358h6.331l1.623-8.26c.656-3.5 1.227-7.921 1.644-11.053.111 6 .27 13.8.36 19.312h5.843c3.485-8.236 6.134-14.578 8-19.377-.891 3.965-1.878 8.487-2.33 10.829l-1.623 8.549h6.914l4.837-25.358z" transform="translate(-87.662 -3.077)"/>
-            <path d="M1373 372.064h-11.265l-4.837 25.358h6.947l1.4-7.88h5.453c6.2 0 10.778-3.3 10.778-9.578-.002-4.906-3.314-7.9-8.476-7.9zm-2.792 12.1h-3.928l1.331-6.765h3.6c2.37 0 3.246 1.119 3.246 2.778.005 2.348-1.618 3.99-4.248 3.99z" transform="translate(-101.88 -3.077)"/>
-            <path d="M1410.973 372.064c-1.467 2.16-5.27 7.448-8.163 11.451a325.407 325.407 0 0 0-3.159-11.451h-7.531l6.189 17.082a4.024 4.024 0 0 1 .126.44l-5.5 7.836h7.077l6.45-9.09 11.979-16.268z" transform="translate(-113.195 -3.077)"/>
-            <path d="M1437.946 371.214c-9.966 0-14.186 8.044-14.186 15.33 0 6.24 3.571 11.182 11.265 11.182 9.609 0 14.381-7.034 14.381-15.258 0-6.312-3.863-11.254-11.46-11.254zm-2.337 21.029c-2.987 0-4.318-2.2-4.318-5.771 0-4.04 1.915-9.884 6.3-9.884 3.279 0 4.35 2.453 4.35 5.3-.002 4.475-1.755 10.355-6.332 10.355z" transform="translate(-123.36 -2.804)"/>
+<header id="global" :class="{'lg:pr-[15px]': $store.bodyScrollLock, 'transform-none active': $store.mobileMenu.on}">
+  <div class="header__main" :class="{'active': $store.mobileMenu.on}">
+    <a href="{{ home_url('/') }}">
+      <svg class="logo" width="148.659" height="28.664" viewBox="0 0 148.659 28.664">
+        <g transform="translate(-50.743 -35.229)">
+          <path d="m941.859 735.594 4.588-19.74-11.441 19.337H930.5l-.545-19.337-6.076 19.74h-5.311l8.2-24.591h7.765l.37 16.071L944.456 711h8.1l-5.064 24.591z" transform="translate(-819.7 -673.138)"/>
+          <path d="M973.274 715.044s1.263.005 2.35.005c2.252 0 4.1.766 4.1 3.1 0 2.479-2.292 4.486-5.75 4.486a12.019 12.019 0 0 1-2.253-.181zm-9.959 20.546h5.67l1.849-8.83c.606.036 1.412.145 2.377.145a15.294 15.294 0 0 0 8.688-2.3 8.3 8.3 0 0 0 3.66-6.9 5.745 5.745 0 0 0-2.935-5.215c-1.971-1.28-4.75-1.506-7.205-1.506h-6.956z" transform="translate(-832.403 -673.134)"/>
+          <path d="M1009.35 711h6.04l-19.436 24.591h-6.725l7.8-9.376-4.45-15.215h5.682l2.672 10.7z" transform="translate(-839.76 -673.138)"/>
+          <path d="M1033.269 707.884a20.738 20.738 0 0 0-8.111 1.6l-9.692 12.262a16.078 16.078 0 0 0-.251 2.789c0 6.3 4.78 11.278 13.323 11.278h.047a18.894 18.894 0 0 0 12.146-3.931 16.462 16.462 0 0 0 5.81-12.724c0-6.458-4.588-11.274-13.272-11.274zm-3.865 23.682h-.05c-5.123 0-7.4-3.026-7.4-7.076 0-5.45 4.176-12.354 10.568-12.354 5.6 0 7.187 3.453 7.187 7.031-.001 5.409-4.177 12.399-10.309 12.399z" transform="translate(-847.138 -672.252)"/>
+          <path d="M904.464 735.594h6.073L907.4 711h-7.44l-13.234 24.591h6.2l2.524-5.236h8.576zm-7.092-9.233s4.6-9.775 5.281-11.269l1.03 11.269z" transform="translate(-810.66 -673.138)"/>
+          <path d="M871.512 719.152c-3.3-1.24-5.461-1.991-5.808-3.554-.326-1.448.963-2.873 4.443-3.189 4.64-.342 9.376 1.56 12.465 3.326l2.6-4.831a27.7 27.7 0 0 0-16.036-3.477h-.034c-6.651.6-12.207 3.709-11.011 9.039.652 2.914 3.533 5.079 8.426 6.961 2.58.991 5.318 2.177 5.656 3.691.451 2.022-1.967 3.29-4.819 3.563h-.057c-4.722.422-9.572-1.379-13.2-3.317l-2.775 5.223a33.976 33.976 0 0 0 16.094 3.361 19.8 19.8 0 0 0 7.282-1.469l4.983-9.258c-.867-2.373-3.286-4.221-8.209-6.069z" transform="translate(-800.621 -672.093)"/>
         </g>
       </svg>
     </a>
   
-    <nav class="nav-primary flex gap-x-[54px]">
-      @if (is_user_logged_in())
-      <div>
+    <div class="hidden lg:block">
+      <nav class="nav-primary flex gap-x-[54px]">
+        @if (is_user_logged_in())
+        <div>
+          <a href="{!! wp_logout_url() !!}">로그아웃</a>
+        </div>
+        @endif
+        {!! wp_nav_menu(['menu' => 0, 'menu_class' => 'flex gap-x-[54px]', 'echo' => false]) !!}
+      </nav>
+    </div>
+    <div class="block lg:hidden">
+      <button class="btn-menu lg:hidden focus:outline-none ml-4 transform scale-75"
+        x-on:click.prevent="$store.mobileMenu.toggle()"
+        :class="{'active' : $store.mobileMenu.on}"
+      >
+        <svg viewBox="0 0 64 48">
+            <path d="M19,15 L45,15 C70,15 58,-2 49.0177126,7 L19,37"></path>
+            <path d="M31,24 L45,24 C61.2371586,24 57,49 41,33 L32,24"></path>
+            <path d="M45,33 L19,33 C-8,33 6,-2 22,14 L45,37"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div
+    x-show="$store.mobileMenu.on"
+    x-cloak
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 transform scale-90"
+    x-transition:enter-end="opacity-100 transform scale-100"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100 transform scale-100"
+    x-transition:leave-end="opacity-0 transform scale-90"
+    class="block lg:hidden w-screen h-screen fixed top-0 left-0 pt-[var(--h-main)] bg-white z-[9000] text-mineShaft-500"
+  >
+    {!! $mnb !!}
+    @if (is_user_logged_in())
+      <div class="pl-[20px] border-b border-mineShaft-100 h-[50px] flex items-center">
         <a href="{!! wp_logout_url() !!}">로그아웃</a>
       </div>
-      @endif
-      {!! wp_nav_menu(['menu' => 0, 'menu_class' => 'flex gap-x-[54px]', 'echo' => false]) !!}
-    </nav>
+    @endif
   </div>
 </header>

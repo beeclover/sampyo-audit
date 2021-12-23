@@ -6,9 +6,9 @@
 
 @section('content')
   @include('partials.page-header', ['bg' => $bg])
-  <div class="container py-[100px] max-w-[1000px]">
+  <div class="container py-[60px] lg:py-[100px] max-w-[1000px]">
     @if (empty(defined('REGISTERED_A_USER')) && !is_user_logged_in())
-      <div class="grid grid-cols-[auto,1fr] items-center mb-[30px]">
+      <div class="grid grid-cols-1 lg:grid-cols-[auto,1fr] gap-y-[16px] items-center mb-[30px]">
         <h2 class="text-[30px] font-bold">로그인 정보 입력</h2>
         <div class="justify-self-end flex gap-x-[20px] items-center">
           <span>이미 개인정보를 입력한 이력이 있을 경우 로그인 해주세요.</span>

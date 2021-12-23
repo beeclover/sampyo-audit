@@ -6,10 +6,13 @@ const common = {
   containerInit() {},
   init() {
     const targetEl = document.querySelector('#global');
-    const headroom = new Headroom(targetEl);
+    const headroom = new Headroom(targetEl, {
+      tolerance: 5,
+      offset: 80,
+    });
     headroom.init();
     $(window).scroll(function () {
-      shrink('header.header__main');
+      shrink('.header__main');
     });
     window.bodyScrollLock = bodyScrollLock;
   },

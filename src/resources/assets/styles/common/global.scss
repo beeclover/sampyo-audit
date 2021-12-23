@@ -8,6 +8,12 @@
   }
 }
 
+html {
+  @media (max-width: theme('screens.lg')) {
+    font-size: 14px;
+  }
+}
+
 body {
   @apply font-sans;
 
