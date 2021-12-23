@@ -1,8 +1,15 @@
 &__main {
   @apply border-b border-white border-opacity-25 text-white transition-all;
 
+  .logo {
+    @apply fill-white;
+  }
+
   @mixin dark {
     @apply bg-white text-mineShaft-500 border-mineShaft-100;
+    .logo {
+      @apply fill-lochmara-500;
+    }
   }
 
   &.shrink,
