@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="flex flex-col justify-center relative min-h-screen pt-[var(--h-main)] lg:pt-0">
-  <div class="container max-w-[calc(960px+2rem)] relative z-10 py-[var(--h-main)] lg:pt-0">
+  <div class="container max-w-[calc(960px+2rem)] relative z-10 py-[var(--h-main)]">
     <h1 class="text-white font-black text-[25px] lg:text-[50px] text-center mb-[40px] lg:mb-[80px]">삼표는 투명하고 정직한 회사,<br/>고객에게는 사랑받는 기업이 되겠습니다</h1>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-y-[16px] gap-x-[30px] lg:h-[300px]">
       <a href="{!! get_the_permalink(26) !!}" class="rounded-[4px] bg-[#ebebeb] hover:bg-[#0086ce] bg-opacity-[0.9] grid lg:place-content-center text-black hover:text-white transition-all">
