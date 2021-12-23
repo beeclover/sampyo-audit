@@ -76,7 +76,7 @@ providers:
 certificatesResolvers:
   leresolver:
     acme:
-      email: certificate@beeclover.pro
+      email: certificate@sampyo-audit.net
       storage: /acme/acme.json
       httpChallenge:
         entryPoint: web
