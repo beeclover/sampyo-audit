@@ -66,7 +66,7 @@
         <div>
           <input type="text" name="contact" value="" id="contact" class="border border-[#9b9b9b] h-[50px] p-[14px] w-full max-w-[220px]" placeholder="‘-‘ 없이 숫자만 입력해주세요." />
         </div>
-        <div class="hidden lg:block col-span-2h-px bg-[#ebebeb]"></div>
+        <div class="hidden lg:block col-span-2 h-px bg-[#ebebeb]"></div>
         <label for="name">
           이메일
         </label>
