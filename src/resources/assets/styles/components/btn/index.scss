@@ -35,4 +35,8 @@
       focus:ring-opacity-75
       transition-all;
   }
+
+  .btn-menu {
+    @import 'menu';
+  }
 }
