@@ -3,6 +3,12 @@
 이 프로젝트에서 주목할만한 모든 변경 사항이이 파일에 문서화됩니다.
 [Keep a Changelog](https://keepachangelog.com/ko/1.0.0/)의 형식을 기본으로 구성됩니다.
 
+## [v0.99.3] 2021-12-23
+
+### Fixed
+
+- package run clean 커맨트 오류
+
 ## [v0.99.2] 2021-12-23
 
 ### Fixed
