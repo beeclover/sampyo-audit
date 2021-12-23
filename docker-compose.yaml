@@ -23,7 +23,8 @@ services:
     labels:
       - traefik.enable=true
       ## HTTP Routers
-      - traefik.http.routers.svc__wordpress.rule=Host(`${PROJECT_NAME}.peterosea.com`)
+      - traefik.http.routers.svc__wordpress.rule=Host(`sampyo-audit.net`) &&
+        Host(`www.sampyo-audit.net`)
       - traefik.http.routers.svc__wordpress.entrypoints=web
       - traefik.http.routers.svc__wordpress.entrypoints=websecure
       - traefik.http.routers.svc__wordpress.tls.certresolver=leresolver
@@ -92,5 +93,5 @@ services:
       - traefik.http.services.svc__traefik.loadbalancer.server.port=8080
 
 volumes:
-  wordpress:
-  redis:
+  wordpress: null
+  redis: null

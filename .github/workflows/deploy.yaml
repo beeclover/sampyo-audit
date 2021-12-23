@@ -1,0 +1,65 @@
+name: 🚛 매뉴얼 배포
+on:
+  release:
+    types: [published]
+  push:
+    branches: [main]
+    paths:
+      - "src/**/*"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    if: ${{ github.repository == 'peterosea/sampyo-audit' }}
+    runs-on: ubuntu-latest
+    name: 🚛 소스코드 업데이트 & 빌드파일 배포
+    steps:
+      - name: 📮 Github 소스코드로 업데이트 `git pull upstream main`
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.DEPLOYSERVER_KEY }}
+          host: ${{ secrets.DEPLOYSERVER_HOST }}
+          username: ${{ secrets.DEPLOYSERVER_USERNAME }}
+          port: ${{ secrets.DEPLOYSERVER_PORT }}
+          script: |
+            cd ${{ secrets.PROJECT_DIR }}
+            git fetch upstream
+            git checkout main
+            git branch | grep 'release/*' | xargs git branch -D
+            git pull upstream main
+
+      - uses: actions/checkout@v2
+
+      - name: 🏗 setup-node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
+
+      - name: 🔨 yarn install & build
+        run: |
+          cd ${{ secrets.SRC }}
+          yarn set version berry
+          yarn install
+          yarn build:production
+
+      - name: 📂 Sync files to Server
+        uses: AEnterprise/rsync-deploy@v1.0
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOYSERVER_KEY }}
+          SERVER_PORT: ${{ secrets.DEPLOYSERVER_RSYNC_PORT }}
+          SERVER_IP: ${{ secrets.DEPLOYSERVER_HOST }}
+          USERNAME: ${{ secrets.DEPLOYSERVER_USERNAME }}
+          FOLDER: "./${{ secrets.SRC }}/public"
+          ARGS: "-rltgoDzvO --ignore-times"
+          SERVER_DESTINATION: "${{ secrets.PROJECT_DIR }}/${{ secrets.SRC }}"
+
+      - name: 🛎 슬랙알림
+        uses: 8398a7/action-slack@v3
+        with:
+          job_name: 🚛 소스코드 업데이트 & 빌드파일 배포
+          status: ${{ job.status }}
+          # fields: repo,message,author,workflow,took,job # selectable (default: repo,message)
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always()
