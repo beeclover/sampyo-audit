@@ -57,7 +57,7 @@
         </div>
         <div class="grid">
           @if (!is_user_logged_in())
-            <form name="loginform" id="loginform" action="https://scr.demo.beeclover.pro/wp-login.php" method="post" class="order-1">
+            <form name="loginform" id="loginform" action="/wp-login.php" method="post" class="order-1">
               <div class="grid grid-cols-[1fr,auto] grid-rows-2 gap-x-[9px] gap-y-[3px] mb-[16px]">
                 <div class="login-username order-1">
                   <input class="w-full border border-[#9b9b9b] p-[12px]" type="text" name="log" id="user" class="input" size="20" placeholder="아이디">
@@ -69,7 +69,7 @@
                   <button class="h-full w-[100px] bg-[#1a73c4] text-white font-bold" type="submit" name="wp-submit" id="wp-submit">
                     로그인
                   </button>
-                  <input type="hidden" name="redirect_to" value="https://scr.demo.beeclover.pro/login/">
+                  <input type="hidden" name="redirect_to" value="/login/">
                 </div>
               </div>
             </form>
