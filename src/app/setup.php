@@ -427,8 +427,8 @@ add_filter('the_title', function ($title) {
  **/
 
 add_action ('wp_loaded', function () {
-  if ( strpos($_SERVER['REQUEST_URI'], 'report') && !is_user_logged_in() ) {
-    $redirect = get_home_url().'/login';
+  if (isset($_SERVER['REDIRECT_URL']) && strpos($_SERVER['REDIRECT_URL'], 'report') && !is_user_logged_in() ) {
+    $redirect = home_url( '/login/?to=/report/' );
     wp_redirect($redirect);
     exit;
   }
@@ -507,3 +507,15 @@ add_action('template_redirect', function() {
     update_field('status', $status, $post_id);
   endif;
 });
+
+
+/**
+ * 로그인 페이지 redirect 규칙
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
+add_filter('login_redirect', function( $redirect_to, $request, $user ) {
+  return $request;
+}, 10, 3);

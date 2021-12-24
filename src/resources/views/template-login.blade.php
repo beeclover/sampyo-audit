@@ -69,7 +69,11 @@
                   <button class="h-full w-[100px] bg-[#1a73c4] text-white font-bold" type="submit" name="wp-submit" id="wp-submit">
                     로그인
                   </button>
-                  <input type="hidden" name="redirect_to" value="/login/">
+                  @if (isset($_GET['to']))
+                    <input type="hidden" name="redirect_to" value="{!! $_GET['to'] !!}">
+                  @else
+                    <input type="hidden" name="redirect_to" value="/login/">
+                  @endif
                 </div>
               </div>
             </form>
