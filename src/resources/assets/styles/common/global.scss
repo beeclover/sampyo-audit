@@ -15,6 +15,7 @@ html {
 }
 
 body {
+  min-width: 100%;
   @apply font-sans;
 
   #app {
