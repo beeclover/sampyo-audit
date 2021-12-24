@@ -24,7 +24,7 @@
         </div>
         <div class="border-b border-mineShaft-500 mb-[30px] lg:mb-[60px]">
           @while(have_posts()) @php(the_post())
-            <div class="grid grid-cols-[1fr,90px,70px,auto] lg:grid-cols-[80px,1fr,140px,140px,auto] items-center border-b border-mineShaft-100 last:border-none">
+            <div class="grid grid-cols-[1fr,90px,70px,auto] lg:grid-cols-[80px,1fr,140px,140px,auto] items-center border-b border-mineShaft-100 last:border-none @if(get_field('status', get_the_ID()) === '답변완료') bg-[#F2F5F7]  @endif">
               <div class="hidden lg:block justify-self-center">{!! $count !!}</div>
               <div>
                 <a class="break-all my-[8px] line-clamp-2" href="{{ get_permalink() }}">{{ get_the_title() }}</a>

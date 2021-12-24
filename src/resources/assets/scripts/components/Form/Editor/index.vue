@@ -3,15 +3,15 @@
     <input type="hidden" name="ispost" value="1" />
     <input type="hidden" name="userid" value="" />
     <input hidden type="text" name="content" :value="editor?.getHTML()">
-    <div class="grid grid-cols-[100px,1fr] gap-y-[8px] border-t border-b border-[#333333] py-[14px] mb-[50px]">
-      <span class="pt-[14px]">제목</span>
-      <div class="pr-[20px]">
+    <div class="grid grid-cols-1 lg:grid-cols-[100px,1fr] gap-y-[8px] border-t border-b border-[#333333] py-[14px] mb-[50px] max-w-full">
+      <div class="lg:pt-[14px]">제목</div>
+      <div class="lg:pr-[20px]">
         <input type="text" name="title" class="border border-[#9b9b9b] p-[14px] w-full" required />
       </div>
-      <div class="col-span-2 h-px bg-[#ebebeb]"></div>
-      <span class="pt-[14px]">내용</span>
-      <div class="pr-[20px]">
-        <div v-if="editor" class="toolbar flex gap-[4px]">
+      <div class="lg:col-span-2 h-px bg-[#ebebeb]"></div>
+      <div class="lg:pt-[14px]">내용</div>
+      <div class="lg:pr-[20px]">
+        <div v-if="editor" class="toolbar flex gap-[4px] overflow-x-auto max-w-full">
           <button class="w-[28px] h-[28px] p-[6px]" @click="editor.chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }">
             <svg id="Layer_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><path id="_x30_6.Bold" d="m403.321 235.911c16.996-20.761 27.479-46.08 30.134-72.779 8.236-85.157-58.583-157.132-141.82-157.132h-225.424c-8.284 0-15 6.716-15 15v59.286c0 8.284 6.716 15 15 15h38.426v321.429h-38.426c-8.284 0-15 6.716-15 15v59.285c0 8.284 6.716 15 15 15h236.473c79.018 0 149.71-57.757 157.366-136.607 5.291-54.074-18.292-102.746-56.729-133.482zm-209.632-140.625h97.946c29.587 0 53.571 23.985 53.571 53.571s-23.985 53.571-53.571 53.571h-97.946zm97.946 321.428h-97.946v-125h97.946c34.518 0 62.5 27.982 62.5 62.5s-27.982 62.5-62.5 62.5z"/></svg>
           </button>
@@ -46,9 +46,9 @@
         </div>
         <editor-content :editor="editor" class="prose prose-sm" />
       </div>
-      <div class="col-span-2 h-px bg-[#ebebeb]"></div>
-      <span class="pt-[14px]">첨부파일</span>
-      <div class="pr-[20px]">
+      <div class="lg:col-span-2 h-px bg-[#ebebeb]"></div>
+      <div class="lg:pt-[14px]">첨부파일</div>
+      <div class="lg:pr-[20px]">
         <button type="button" @click="add()" class="flex w-full items-center mb-[14px]">
           <div class="h-[45px] bg-white border border-[#9b9b9b] w-full"></div>
           <div class="whitespace-nowrap flex items-center justify-center w-[150px] text-white font-bold bg-[#9b9b9b] h-[45px]">파일열기</div>
@@ -63,7 +63,7 @@
             :is="component"
             v-bind="{remove, index, loaded}"
           />
-          <div v-if="uploading" class="loading absolute left-0 right-0 bottom-0 top-0 flex items-center justify-center">
+          <div v-if="uploading" class="hidden lg:flex loading absolute left-0 right-0 bottom-0 top-0 items-center justify-center">
             <div class="loader loader--style2 relative z-10" title="1">
               <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">

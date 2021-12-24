@@ -12,7 +12,7 @@
         <h2 class="text-[30px] font-bold">로그인 정보 입력</h2>
         <div class="justify-self-end flex gap-x-[20px] items-center">
           <span>이미 개인정보를 입력한 이력이 있을 경우 로그인 해주세요.</span>
-          <a href="/login" class="btn-lochmara">로그인</a>
+          <a href="/login?to=/create-report/" class="btn-lochmara">로그인</a>
         </div>
       </div>
     @endif

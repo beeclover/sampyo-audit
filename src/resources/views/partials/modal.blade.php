@@ -15,14 +15,14 @@
       x-transition:leave-start="opacity-100 transform scale-100"
       x-transition:leave-end="opacity-0 transform scale-90"
       >
-      <div class="grid text-mineShaft-500">
-        <div class="prose mb-[20px]">
+      <div class="grid text-mineShaft-500 justify-center">
+        <div class="justify-self-center prose mb-[20px]">
           제보 등록이 완료되었습니다<br/>
           처리결과는 처리결과 확인페이지에서 확인하실 수 있습니다.
         </div>
-        <div class="justify-self-end flex gap-x-[5px]">
-          <a href="/" class="btn-lochmara px-[30px] py-[15px]">확인</a>
-          <a x-bind:href="$store.postlink" class="btn px-[30px] py-[15px]">등록한 제보 확인</a>
+        <div class="justify-self-center flex gap-x-[5px]">
+          <a href="/" class="btn-lochmara px-[30px] py-[15px] w-[160px]">확인</a>
+          <a x-bind:href="$store.postlink" class="btn px-[30px] py-[15px] w-[160px]">등록한 제보 확인</a>
         </div>
       </div>
     </div>
