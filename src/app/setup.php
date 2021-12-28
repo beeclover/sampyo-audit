@@ -519,3 +519,21 @@ add_action('template_redirect', function() {
 add_filter('login_redirect', function( $redirect_to, $request, $user ) {
   return $request;
 }, 10, 3);
+
+/**
+ * 관리자 체크
+ *
+ * @author       Hansanghyeon
+ * @copyright    Hansanghyeon <999@hyeon.pro>
+ **/
+
+add_action ('wp_loaded', function () {
+  if (!(isset($_SERVER['REDIRECT_URL']) && strpos($_SERVER['REDIRECT_URL'], 'admin_check'))) return;
+  if (current_user_can('moderate_comments') ):
+    exit;
+  else:
+    $redirect = home_url( '/404' );
+    wp_redirect($redirect);
+    exit;
+  endif;
+});
