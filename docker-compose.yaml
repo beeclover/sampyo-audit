@@ -28,8 +28,17 @@ services:
       - traefik.http.routers.svc__wordpress.entrypoints=web
       - traefik.http.routers.svc__wordpress.entrypoints=websecure
       - traefik.http.routers.svc__wordpress.tls.certresolver=leresolver
-      ## Service
+      - traefik.http.routers.svc__wordpress.service=svc__wordpress
       - traefik.http.services.svc__wordpress.loadbalancer.server.port=80
+
+      - traefik.http.routers.svc__wordpress_admin.entrypoints=websecure
+      - traefik.http.routers.svc__wordpress_admin.rule=Host(`${PROJECT_NAME}.demo.beeclover.pro`)
+        && PathPrefix(`/wp-content/uploads/{year:[0-9]+}/{month:[0-9]+}/`)
+      - traefik.http.routers.svc__wordpress_admin.tls.certresolver=leresolver
+      - traefik.http.routers.svc__wordpress_admin.service=svc__wordpress_admin
+      - traefik.http.services.svc__wordpress_admin.loadbalancer.server.port=80
+      - traefik.http.routers.svc__wordpress_admin.middlewares=favicon@file,
+        wordpress_admin_check@file
 
   db:
     image: mariadb

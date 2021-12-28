@@ -3,6 +3,12 @@
 이 프로젝트에서 주목할만한 모든 변경 사항이이 파일에 문서화됩니다.
 [Keep a Changelog](https://keepachangelog.com/ko/1.0.0/)의 형식을 기본으로 구성됩니다.
 
+## [v0.99.12] 2021-12-28
+
+### Added
+
+- traefik을 통한 media폴더 접근 워드프레스 관리자로 허용
+
 ## [v0.99.11] 2021-12-24
 
 ### Removed

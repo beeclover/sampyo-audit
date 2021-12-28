@@ -27,7 +27,18 @@ services:
         - traefik.http.routers.work-202110__${PROJECT_NAME}.entrypoints=websecure
         - traefik.http.routers.work-202110__${PROJECT_NAME}.rule=Host(`${PROJECT_NAME}.demo.beeclover.pro`)
         - traefik.http.routers.work-202110__${PROJECT_NAME}.tls.certresolver=leresolver
+        - traefik.http.routers.work-202110__${PROJECT_NAME}.service=work-202110__${PROJECT_NAME}
         - traefik.http.services.work-202110__${PROJECT_NAME}.loadbalancer.server.port=80
+
+        - traefik.http.routers.work-202110__${PROJECT_NAME}_admin.entrypoints=websecure
+        - traefik.http.routers.work-202110__${PROJECT_NAME}_admin.rule=Host(`${PROJECT_NAME}.demo.beeclover.pro`)
+          && PathPrefix(`/wp-content/uploads/{year:[0-9]+}/{month:[0-9]+}/`)
+        - traefik.http.routers.work-202110__${PROJECT_NAME}_admin.tls.certresolver=leresolver
+        - traefik.http.routers.work-202110__${PROJECT_NAME}_admin.service=work-202110__${PROJECT_NAME}_admin
+        - traefik.http.services.work-202110__${PROJECT_NAME}_admin.loadbalancer.server.port=80
+        - traefik.http.routers.work-202110__${PROJECT_NAME}_admin.middlewares=favicon@file,
+          wordpress_admin_check@file
+
   redis:
     image: redis:latest
     volumes:

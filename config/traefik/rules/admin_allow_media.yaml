@@ -1,0 +1,6 @@
+http:
+  middlewares:
+    wordpress_admin_check:
+      forwardAuth:
+        address: https://scr.demo.beeclover.pro/admin_check
+        trustForwardHeader: true
