@@ -32,7 +32,7 @@ services:
       - traefik.http.services.svc__wordpress.loadbalancer.server.port=80
 
       - traefik.http.routers.svc__wordpress_admin.entrypoints=websecure
-      - traefik.http.routers.svc__wordpress_admin.rule=Host(`${PROJECT_NAME}.demo.beeclover.pro`)
+      - traefik.http.routers.svc__wordpress_admin.rule=Host(`sampyo-audit.net`)
         && PathPrefix(`/wp-content/uploads/{year:[0-9]+}/{month:[0-9]+}/`)
       - traefik.http.routers.svc__wordpress_admin.tls.certresolver=leresolver
       - traefik.http.routers.svc__wordpress_admin.service=svc__wordpress_admin

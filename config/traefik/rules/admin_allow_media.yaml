@@ -2,5 +2,5 @@ http:
   middlewares:
     wordpress_admin_check:
       forwardAuth:
-        address: https://scr.demo.beeclover.pro/admin_check
+        address: https://sampyo-audit.net/admin_check
         trustForwardHeader: true
