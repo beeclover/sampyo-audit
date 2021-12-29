@@ -10,7 +10,7 @@
     <div class="container grid place-content-center py-[60px] lg:py-[100px]">
       <div class="max-w-[480px]">
         @if (is_user_logged_in())
-          <div class="text-center p-[16px] rounded-[4px] bg-[#0CA1F7] text-white mb-[16px] max-w-[200px] w-full">
+          <div class="text-center p-[16px] rounded-[4px] mb-[16px]">
             <div class="text-xl font-bold">
               로그인 성공
             </div>
@@ -19,7 +19,7 @@
             </div>
           </div>
           @if (current_user_can('moderate_comments'))
-            <a href="/wp-admin" class="w-full max-w-[200px] btn rounded-[4px] font-normal">
+            <a href="/wp-admin" class="w-full btn rounded-[4px] font-normal">
               관리자 화면으로 이동
             </a>
           @endif
