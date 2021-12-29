@@ -10,10 +10,10 @@
         </div>
         <div class="text-davyGrey text-[20px] mb-[60px] text-center">
           이용에 불편을 드려 죄송합니다.<br/>
-          페이지에 포스트가 존재하지 않습니다.
+          제보내용이 존재하지 않습니다.
         </div>
         <div class="flex flex-wrap gap-[24px] justify-center">
-          <a href="/" class="btn w-[300px] py-[16px] font-normal text-[20px] rounded-[4px]">제보하러 가기</a>
+          <a href="/create-report" class="btn w-[300px] py-[16px] font-normal text-[20px] rounded-[4px]">제보하러 가기</a>
         </div>
       @else
         <div class="grid grid-cols-[1fr,90px,70px] lg:grid-cols-[80px,1fr,140px,140px] h-[60px] items-center border-t border-b border-mineShaft-500 text-center">
