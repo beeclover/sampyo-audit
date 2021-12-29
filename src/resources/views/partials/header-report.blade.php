@@ -1,7 +1,7 @@
 <div class="header__page">
   <div class="header__page-body">
     <div>
-      <h1 class="header__page-title">처리결과 확인</h1>
+      <h1 class="header__page-title">제보목록</h1>
     </div>
   </div>
   <div class="header__page-background">
