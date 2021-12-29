@@ -111,13 +111,39 @@
     <div class="text-center flex gap-[5px] justify-center flex-wrap">
       <button class="btn-lochmara w-[140px] bg-lochmara-600" @click.prevent="document.querySelector('.comment-form').submit()">@if (!empty($answer))수정@else 답변등록@endif</button>
       @if (current_user_can('moderate_comments') && ($status = get_field('status', get_the_ID())) === '답변완료')
+      <div x-data="{editor: false}">
+        <button @click.prevent="editor=!editor" class="btn bg-[#d63315] w-[140px]">
+          삭제
+        </button>
+        <div id="bgMask" class="fixed top-0 bottom-0 left-0 right-0 w-full h-full bg-black opacity-50 z-[9010]" x-cloak x-show="editor"></div>
+        <div 
+          x-show="editor"
+          x-cloak
+          @click.away="editor = false"
+          x-transition:enter="transition ease-out duration-300"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100 "
+          x-transition:leave="transition ease-in duration-200"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+          class="bg-white fixed position-center max-w-[300px] w-[90%] min-h-[160px] p-[20px] z-[9010] flex flex-col justify-between">
+          <p class="text-left text-[18px] mb-[20px]">
+            답변을 삭제하시겠습니까?
+          </p>
           <form action="{!! get_the_permalink() !!}" method="post" class="m-0">
             <input type="hidden" name="post_id" value="{!! get_the_ID() !!}">
             <input type="hidden" name="status" value="{!! $status !!}">
-            <button type="submit" class="btn bg-[#d63315] w-[140px]">
-              삭제
-            </button>
+            <div class="flex gap-[5px] justify-end">
+              <button type="submit" class="btn-lochmara bg-lochmara-600">
+                확인
+              </button>
+              <button @click.prevent="editor=!editor" class="btn">
+                취소
+              </button>
+            </div>
           </form>
+        </div>
+      </div>
         @endif
       <a href="/report/?title=처리결과%20확인" class="btn w-[140px]">목록으로</a>
     </div>
