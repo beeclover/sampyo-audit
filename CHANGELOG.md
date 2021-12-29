@@ -3,6 +3,13 @@
 이 프로젝트에서 주목할만한 모든 변경 사항이이 파일에 문서화됩니다.
 [Keep a Changelog](https://keepachangelog.com/ko/1.0.0/)의 형식을 기본으로 구성됩니다.
 
+## [v0.99.15] 2021-12-29
+
+### Added
+
+- 로그인 페이지에서 관리자는 관리자 화면으로 이동 버튼 추가
+- 답변 취소 확인 모달추가
+
 ## [v0.99.14] 2021-12-29
 
 - [수정사항 버그 · Issue #30 · beeclover/sampyo-audit](https://github.com/beeclover/sampyo-audit/issues/30)
