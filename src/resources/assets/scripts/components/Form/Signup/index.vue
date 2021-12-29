@@ -79,7 +79,10 @@
           </div>
           <select @change="bEmailChange" class="border border-[#9b9b9b] h-[50px] px-[14px] py-[8px] pr-[40px]">
             <option value="">직접입력하기</option>
+            <option value="daum.net">daum.net</option>
+            <option value="hanmail.net">hanmail.net</option>
             <option value="naver.com">naver.com</option>
+            <option value="kakao.com">kakao.com</option>
             <option value="gmail.com">gmail.com</option>
           </select>
         </div>

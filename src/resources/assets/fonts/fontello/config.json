@@ -19,21 +19,15 @@
       "src": "entypo"
     },
     {
-      "uid": "41087bc74d4b20b55059c60a33bf4008",
-      "css": "edit",
-      "code": 59394,
-      "src": "fontawesome"
+      "uid": "7ssl5z5jrhu13tb13cd3gb4bdfkzbfzw",
+      "css": "print",
+      "code": 59396,
+      "src": "modernpics"
     },
     {
       "uid": "6020aff067fc3c119cdd75daa5249220",
       "css": "exchange",
       "code": 61676,
-      "src": "fontawesome"
-    },
-    {
-      "uid": "f48ae54adfb27d8ada53d0fd9e34ee10",
-      "css": "trash-empty",
-      "code": 59395,
       "src": "fontawesome"
     }
   ]

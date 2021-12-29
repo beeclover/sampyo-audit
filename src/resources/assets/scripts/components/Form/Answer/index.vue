@@ -1,7 +1,7 @@
 <template>
   <div>
     <input hidden type="text" name="comment" :value="editor?.getHTML()">
-    <div v-if="editor" class="toolbar flex gap-[4px]">
+    <div v-if="editor" class="toolbar sm:flex gap-[4px] hidden">
       <div class="w-[28px] h-[28px] p-[6px] cursor-pointer" @click="editor.chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }">
         <svg id="Layer_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><path id="_x30_6.Bold" d="m403.321 235.911c16.996-20.761 27.479-46.08 30.134-72.779 8.236-85.157-58.583-157.132-141.82-157.132h-225.424c-8.284 0-15 6.716-15 15v59.286c0 8.284 6.716 15 15 15h38.426v321.429h-38.426c-8.284 0-15 6.716-15 15v59.285c0 8.284 6.716 15 15 15h236.473c79.018 0 149.71-57.757 157.366-136.607 5.291-54.074-18.292-102.746-56.729-133.482zm-209.632-140.625h97.946c29.587 0 53.571 23.985 53.571 53.571s-23.985 53.571-53.571 53.571h-97.946zm97.946 321.428h-97.946v-125h97.946c34.518 0 62.5 27.982 62.5 62.5s-27.982 62.5-62.5 62.5z"/></svg>
       </div>
@@ -74,88 +74,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-.toolbar {
-  display: flex;
-  padding: 6px calc(var(--container-px) / 2);
-  border: 1px solid #9b9b9b;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-}
-/* Basic editor styles */
-.ProseMirror {
-  outline: none;
-  border-bottom: 1px solid #9b9b9b;
-  border-left: 1px solid #9b9b9b;
-  border-right: 1px solid #9b9b9b;
-  padding-top: calc(var(--container-px) / 2);
-  padding-bottom: calc(var(--container-px) / 2);
-  padding-left: calc(var(--container-px) / 2);
-  padding-right: calc(var(--container-px) / 2);
-  min-height: 14em;
-  max-height: 100em;
-  overflow-y: auto;
-
-  > * + * {
-    margin-top: 0.75em;
-  }
-
-  > *:first-child {
-    margin-top: 0;
-  }
-
-  ul,
-  ol {
-    padding: 0 1rem;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    line-height: 1.1;
-  }
-
-  code {
-    background-color: rgba(#616161, 0.1);
-    color: #616161;
-  }
-
-  pre {
-    background: #0D0D0D;
-    color: #FFF;
-    font-family: 'JetBrainsMono', monospace;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-
-    code {
-      color: inherit;
-      padding: 0;
-      background: none;
-      font-size: 0.8rem;
-    }
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  blockquote {
-    padding-left: 1rem;
-    border-left: 2px solid rgba(#0D0D0D, 0.1);
-  }
-
-  hr {
-    border: none;
-    border-top: 2px solid rgba(#0D0D0D, 0.1);
-    margin: 2rem 0;
-  }
-}
-</style>
