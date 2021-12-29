@@ -65,9 +65,7 @@ export default {
       extensions: [
         StarterKit,
       ],
-      content: this.content || `
-        <p>내용을 입력해주세요.</p>
-      `,
+      content: this.content || ``,
     });
   },
 
