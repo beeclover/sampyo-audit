@@ -443,7 +443,7 @@ add_action('wp_loaded', function () {
  **/
 
 add_action('wp_loaded', function () {
-    if (isset($_POST['action']) && is_user_logged_in() && current_user_can('moderate_comments' && $_POST['action'] === 'editedcomment')) {
+    if (isset($_POST['action']) && is_user_logged_in() && current_user_can('moderate_comments') && $_POST['action'] === 'editedcomment') {
         if (!isset($_POST['comment_ID'])) {
             return;
         }
