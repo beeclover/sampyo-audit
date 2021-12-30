@@ -32,7 +32,7 @@
         @endif
         <div class="mb-[30px]">
           @if (($login = (isset($_GET['login']) ) ? $_GET['login'] : 0) === "failed")
-            <div class="text-center p-[16px] rounded-[4px] bg-[#FA375C] text-white max-w-[200px] w-full">
+            <div class="text-center p-[16px] rounded-[4px] bg-[#FA375C] text-white w-full">
               <div class="text-xl font-bold">
                 로그인 실패
               </div>
@@ -41,7 +41,7 @@
               </div>
             </div>
           @elseif($login === "false")
-            <div class="text-center p-[16px] rounded-[4px] bg-[#0CA1F7] text-white max-w-[200px] w-full">
+            <div class="text-center p-[16px] rounded-[4px] bg-[#0CA1F7] text-white w-full">
               <div class="text-xl font-bold">
                 로그아웃 성공
               </div>
@@ -50,7 +50,7 @@
               </div>
             </div>
           @elseif($login === "empty")
-            <div class="text-center p-[16px] rounded-[4px] bg-[#FFC73C] text-white max-w-[200px] w-full">
+            <div class="text-center p-[16px] rounded-[4px] bg-[#FFC73C] text-white w-full">
               <div class="text-xl font-bold">
                 사용자 이름 및 / 또는 암호가 비어 있습니다
               </div>
