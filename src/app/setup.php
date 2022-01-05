@@ -210,14 +210,6 @@ add_action('wp_login_failed', function () {
     exit;
 });
 
-add_filter('authenticate', function ($user, $username, $password) {
-    $login_page  = home_url('/login/');
-    if ($username == "" || $password == "") {
-        wp_redirect($login_page . "?login=empty");
-        exit;
-    }
-}, 1, 3);
-
 add_action('wp_logout', function () {
     $login_page  = home_url('/login/');
     wp_redirect($login_page . "?login=false");
