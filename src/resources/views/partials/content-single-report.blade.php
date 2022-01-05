@@ -109,8 +109,8 @@
       </form>
     @endif
     <div class="text-center flex gap-[5px] justify-center flex-wrap">
-      <button class="btn-lochmara w-[140px] bg-lochmara-600" @click.prevent="document.querySelector('.comment-form').submit()">@if (!empty($answer))수정@else 답변등록@endif</button>
       @if (current_user_can('moderate_comments') && ($status = get_field('status', get_the_ID())) === '답변완료')
+      <button class="btn-lochmara w-[140px] bg-lochmara-600" @click.prevent="document.querySelector('.comment-form').submit()">@if (!empty($answer))수정@else 답변등록@endif</button>
       <div x-data="{editor: false}">
         <button @click.prevent="editor=!editor" class="btn bg-[#d63315] w-[140px]">
           삭제
@@ -144,7 +144,7 @@
           </form>
         </div>
       </div>
-        @endif
+      @endif
       <a href="/report/?title=처리결과%20확인" class="btn w-[140px]">목록으로</a>
     </div>
   </div>
