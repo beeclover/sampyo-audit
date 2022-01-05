@@ -76,6 +76,16 @@
           </form>
         @endif
       </div>
+      @if (!empty($answer) && !current_user_can('moderate_comments'))
+        <div class="h-px bg-mineShaft-100 col-span-2 mb-[40px]"></div>
+        <div class="col-span-2 lg:col-span-1 h-full flex self-start bg-[#f5f5f5] pt-[16px] lg:py-[36px]">
+          <div class="max-h-[90px] lg:min-h-[60px] px-[20px] lg:px-[24px] font-medium">답변내용</div>
+        </div>
+        <div class="col-span-2 lg:col-span-1 prose prose-sm ProseMirror !border-none px-[24px] lg:!px-0 transition-all !whitespace-normal bg-[#f5f5f5] py-[36px]">
+          {!! $answer->comment_content !!}
+        </div>
+        <div class="col-span-2 mb-[50px]"></div>
+      @endif
     </div>
     @if (current_user_can('moderate_comments'))
       <div class="flex justify-end mt-[-40px] mb-[50px]">
@@ -85,7 +95,7 @@
       </div>
     @endif
 
-    @if (!empty($answer) || current_user_can('moderate_comments'))
+    @if (!empty($answer) && current_user_can('moderate_comments'))
       <div class="text-[20px] text-mineShaft-500 font-bold mb-[19px]">답변쓰기</div>
       @if (!empty($answer))
       <form method="post" id="" class="comment-form">
@@ -109,8 +119,10 @@
       </form>
     @endif
     <div class="text-center flex gap-[5px] justify-center flex-wrap">
+      @if (current_user_can('moderate_comments'))
+        <button class="btn-lochmara w-[140px] bg-lochmara-600" @click.prevent="document.querySelector('.comment-form').submit()">@if (!empty($answer))수정@else 답변등록@endif</button>
+      @endif
       @if (current_user_can('moderate_comments') && ($status = get_field('status', get_the_ID())) === '답변완료')
-      <button class="btn-lochmara w-[140px] bg-lochmara-600" @click.prevent="document.querySelector('.comment-form').submit()">@if (!empty($answer))수정@else 답변등록@endif</button>
       <div x-data="{editor: false}">
         <button @click.prevent="editor=!editor" class="btn bg-[#d63315] w-[140px]">
           삭제
