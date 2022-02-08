@@ -6,19 +6,16 @@
       </div>
       <div>{!! $title !!}</div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
-  
       <div class="min-h-[60px] flex items-center self-start">
         <div class="px-[8px] lg:px-[24px] font-medium">성명</div>
       </div>
       <div>{!! $name !!}</div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
-  
       <div class="min-h-[60px] flex items-center self-start">
         <div class="px-[8px] lg:px-[24px] font-medium">연락처</div>
       </div>
       <div>{!! $contact !!}</div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
-  
       <div class="min-h-[60px] flex items-center self-start">
         <div class="px-[8px] lg:px-[24px] font-medium">이메일 주소</div>
       </div>
@@ -33,7 +30,6 @@
         </div>
         <div class="h-px bg-mineShaft-100 col-span-2"></div>
       @endif
-  
       <div class="h-full max-h-[120px] min-h-[60px] flex items-center self-start">
         <div class="px-[8px] lg:px-[24px] font-medium">첨부파일</div>
       </div>
@@ -51,7 +47,6 @@
         </ul>
       </div>
       <div class="h-px bg-mineShaft-100 col-span-2"></div>
-  
       <div class="min-h-[60px] flex items-center self-start">
         <div class="px-[8px] lg:px-[24px] font-medium">답변여부</div>
       </div>
@@ -59,18 +54,17 @@
         <span class="@if(get_field('status', get_the_ID()) === '답변완료') text-lochmara-500 @endif">
           {!! get_field('status', get_the_ID()) !!}
         </span>
-      
         @if (current_user_can('moderate_comments') && preg_match("/[대기중|처리중]/", $status = get_field('status', get_the_ID())))
           <form action="{!! get_the_permalink() !!}" method="post" class="m-0">
             <input type="hidden" name="post_id" value="{!! get_the_ID() !!}">
             <input type="hidden" name="status" value="{!! $status !!}">
-            @if ($status === '처리중') 
+            @if ($status === '처리중')
               <button type="submit" class="btn px-[8px] py-[4px] font-normal">
                 <i class="icon-exchange"></i> 대기중
               </button>
             @elseif($status === '대기중')
               <button type="submit" class="btn px-[8px] py-[4px] font-normal">
-                <i class="icon-exchange"></i> 처리중 
+                <i class="icon-exchange"></i> 처리중
               </button>
               @endif
           </form>
@@ -94,8 +88,7 @@
         </a>
       </div>
     @endif
-
-    @if (!empty($answer) && current_user_can('moderate_comments'))
+    @if ((!empty($answer) || $answer === '') && current_user_can('moderate_comments'))
       <div class="text-[20px] text-mineShaft-500 font-bold mb-[19px]">답변쓰기</div>
       @if (!empty($answer))
       <form method="post" id="" class="comment-form">
@@ -128,7 +121,7 @@
           삭제
         </button>
         <div id="bgMask" class="fixed top-0 bottom-0 left-0 right-0 w-full h-full bg-black opacity-50 z-[9010]" x-cloak x-show="editor"></div>
-        <div 
+        <div
           x-show="editor"
           x-cloak
           @click.away="editor = false"
