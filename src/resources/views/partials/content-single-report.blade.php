@@ -88,7 +88,7 @@
         </a>
       </div>
     @endif
-    @if (!empty($answer) && current_user_can('moderate_comments'))
+    @if ((!empty($answer) || $answer === '') && current_user_can('moderate_comments'))
       <div class="text-[20px] text-mineShaft-500 font-bold mb-[19px]">답변쓰기</div>
       @if (!empty($answer))
       <form method="post" id="" class="comment-form">
