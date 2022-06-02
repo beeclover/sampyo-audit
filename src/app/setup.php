@@ -6,6 +6,8 @@
 
 namespace App;
 
+use Exception;
+
 use function Roots\asset;
 
 /**
@@ -225,97 +227,103 @@ add_action('wp_logout', function () {
  **/
 
 add_action('wp_loaded', function () {
-    if ($_SERVER['REQUEST_URI'] === '/create-report/' && is_user_logged_in()) {
-        // Check that the nonce was set and valid
-        if (isset($_POST['_wpnonce']) && !wp_verify_nonce($_POST['_wpnonce'], 'wps-frontend-post')) {
-            // echo '귀하의 양식이 무효화 된 것으로 보이기 때문에 저장하지 않았습니다. 죄송합니다';
-            return;
-        }
-
-        // Stop running function if form wasn't submitted
-        if (!isset($_POST['title'])) {
-            // echo '제목이 설정되어있지 않음';
-            return;
-        }
-
-        // Do some minor form validation to make sure there is content
-        if (strlen($_POST['title']) < 3) {
-            // echo '제목을 입력하십시오. 제목은 최소한 3 자 이상이어야합니다.';
-            return;
-        }
-
-        // Add the content of the form to $post as an array
-        $post = array(
-            'post_title'    => $_POST['title'],
-            'post_content'  => $_POST['content'],
-            'post_status'   => 'private',   // Could be: publish
-            'post_type'   => 'report' // Could be: `page` or your CPT
-        );
-        $new_post = wp_insert_post($post);
-
-        if ($_FILES) {
-            if (!function_exists('wp_generate_attachment_metadata')) {
-                require_once(ABSPATH . "wp-admin" . '/includes/image.php');
-                require_once(ABSPATH . "wp-admin" . '/includes/file.php');
-                require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+    try {
+        if ($_SERVER['REQUEST_URI'] === '/create-report/' && is_user_logged_in() || $_SERVER['REQUEST_URI'] === '/create-report' && is_user_logged_in()) {
+            // Check that the nonce was set and valid
+            if (isset($_POST['_wpnonce']) && !wp_verify_nonce($_POST['_wpnonce'], 'wps-frontend-post')) {
+                // echo '귀하의 양식이 무효화 된 것으로 보이기 때문에 저장하지 않았습니다. 죄송합니다';
+                return;
             }
 
-            foreach ($_FILES as $file => $array) {
-                if ($_FILES[$file]['error'] !== UPLOAD_ERR_OK) {
-                    return "upload error : " . $_FILES[$file]['error'];
-                }
-                $attach_id = media_handle_upload($file, $new_post);
-
-                // Please use field key instead of field name
-                $field_key = 'field_61b1a87048bc5';
-
-                // Get the field value first if it's available
-                $repeater_value = get_field('attached-files', $new_post);
-
-                // Add the row to the repeater
-                if (is_array($repeater_value)) {
-                    array_push($repeater_value, array('file' => $attach_id));
-                } else {
-                    $repeater_value[] = array('file' => $attach_id);
-                }
-
-                // Update the repeater field
-                update_field($field_key, $repeater_value, $new_post);
+            // Stop running function if form wasn't submitted
+            if (!isset($_POST['title'])) {
+                // echo '제목이 설정되어있지 않음';
+                return;
             }
-        }
 
-        // default status 대기중
-        update_field('status', 'waiting', $new_post);
+            // Do some minor form validation to make sure there is content
+            if (strlen($_POST['title']) < 3) {
+                // echo '제목을 입력하십시오. 제목은 최소한 3 자 이상이어야합니다.';
+                return;
+            }
 
-        $link = get_the_permalink($new_post);
-
-        // 작성완료시 관리자에게 알림 이메일
-        $nt = get_field('notification_targets', 'options');
-        if ($nt) {
-            $targets = array_map(function ($user) {
-                $user = $user['user'];
-                return $user->user_email;
-            }, $nt);
-            wp_mail(
-                $targets,
-                '[사이버감사실] 새로운 제보내용 등록 알림',
-                <<<EOD
-        사이버감사실 알림 시스템입니다.
-        사이버 감사실에 새로운 제보내용이 등록되었습니다.
-        확인 바랍니다.
-  
-        해당글 바로가기 - $link
-EOD
+            // Add the content of the form to $post as an array
+            $post = array(
+                'post_title'    => $_POST['title'],
+                'post_content'  => $_POST['content'],
+                'post_status'   => 'private',   // Could be: publish
+                'post_type'   => 'report' // Could be: `page` or your CPT
             );
+            $new_post = wp_insert_post($post);
+
+            if ($_FILES) {
+                if (!function_exists('wp_generate_attachment_metadata')) {
+                    require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+                    require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+                    require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+                }
+
+                foreach ($_FILES as $file => $array) {
+                    if ($_FILES[$file]['error'] !== UPLOAD_ERR_OK) {
+                        return "upload error : " . $_FILES[$file]['error'];
+                    }
+                    $attach_id = media_handle_upload($file, $new_post);
+
+                    // Please use field key instead of field name
+                    $field_key = 'field_61b1a87048bc5';
+
+                    // Get the field value first if it's available
+                    $repeater_value = get_field('attached-files', $new_post);
+
+                    // Add the row to the repeater
+                    if (is_array($repeater_value)) {
+                        array_push($repeater_value, array('file' => $attach_id));
+                    } else {
+                        $repeater_value[] = array('file' => $attach_id);
+                    }
+
+                    // Update the repeater field
+                    update_field($field_key, $repeater_value, $new_post);
+                }
+            }
+
+            // default status 대기중
+            update_field('status', 'waiting', $new_post);
+
+            $link = get_the_permalink($new_post);
+
+            // 작성완료시 관리자에게 알림 이메일
+            $nt = get_field('notification_targets', 'options');
+            if ($nt) {
+                $targets = array_map(function ($user) {
+                    $user = $user['user'];
+                    return $user->user_email;
+                }, $nt);
+                wp_mail(
+                    $targets,
+                    '[사이버감사실] 새로운 제보내용 등록 알림',
+                    <<<EOD
+            사이버감사실 알림 시스템입니다.
+            사이버 감사실에 새로운 제보내용이 등록되었습니다.
+            확인 바랍니다.
+
+            해당글 바로가기 - $link
+EOD
+                );
+            }
+            $redirect = get_home_url() . '/create-report?posting=done&postlink=' . $link;
+            wp_redirect($redirect);
+            exit;
         }
-        $redirect = get_home_url() . '/create-report?posting=done&postlink=' . $link;
-        wp_redirect($redirect);
-        exit;
-    }
-    if ($_SERVER['REQUEST_URI'] === '/create-report/' && !is_user_logged_in()) {
-        $redirect = get_home_url() . '/signup?title=제보하기';
-        wp_redirect($redirect);
-        exit;
+
+        if ($_SERVER['REQUEST_URI'] === '/create-report/' && !is_user_logged_in()) {
+            $redirect = get_home_url() . '/signup?title=제보하기';
+            wp_redirect($redirect);
+            exit;
+        }
+    } catch (\Throwable $th) {
+        wp_mail( 'x-aaaae3fezbrhkq7mr7ob6xnosa@peteroseainc.slack.com', '[ERROR] Create Report', $th->getMessage() );
+        echo $th->getMessage();
     }
 });
 
