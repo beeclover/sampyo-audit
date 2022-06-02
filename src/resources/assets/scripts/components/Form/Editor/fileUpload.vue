@@ -1,5 +1,5 @@
 <template>
-  <div :id="'file-' + this.index" class="lg:hidden">
+  <div :id="'file-' + this.index">
     <div class="inputWrap flex items-center gap-x-[13px]">
       <input
         hidden
