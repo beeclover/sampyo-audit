@@ -52,7 +52,5 @@ services:
 networks:
   traefik_proxy:
     external: true
-  WORK:
-    external: true
 volumes:
   redis: null
