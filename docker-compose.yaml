@@ -4,11 +4,12 @@ services:
   wordpress:
     env_file:
       - ./.env
-    container_name: WP__${PROJECT_NAME}
-    image: ghcr.io/hansanghyeon/wordpress-redis:php8.0-apache-redis
-    restart: always
+    image: ghcr.io/hansanghyeon/wordpress-redis:5.8.2-php8.0-apache-redis
+    networks:
+      - traefik_proxy
+      - default
     environment:
-      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: root
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_DB_NAME: wp
@@ -17,90 +18,41 @@ services:
         define('WP_REDIS_HOST', getenv_docker('WORDPRESS_REDIS_HOST', 'redis'));
         define('WP_REDIS_PORT', getenv_docker('WORDPRESS_REDIS_PORT', 6379));
     volumes:
-      - wordpress:/var/www/html
       - ./wp-content:/var/www/html/wp-content
       - ./src:/var/www/html/wp-content/themes/sage
     labels:
       - traefik.enable=true
-      ## HTTP Routers
-      - traefik.http.routers.svc__wordpress.rule=Host(`sampyo-audit.net`,
-        `www.sampyo-audit.net`)
-      - traefik.http.routers.svc__wordpress.entrypoints=web
-      - traefik.http.routers.svc__wordpress.entrypoints=websecure
-      - traefik.http.routers.svc__wordpress.tls.certresolver=leresolver
-      - traefik.http.routers.svc__wordpress.service=svc__wordpress
-      - traefik.http.services.svc__wordpress.loadbalancer.server.port=80
+      - traefik.http.routers.work-202110__${PROJECT_NAME}.entrypoints=websecure
+      - traefik.http.routers.work-202110__${PROJECT_NAME}.rule=Host(`${PROJECT_NAME}.demo.beeclover.pro`)
+      - traefik.http.routers.work-202110__${PROJECT_NAME}.tls.certresolver=leresolver
+      - traefik.http.routers.work-202110__${PROJECT_NAME}.service=work-202110__${PROJECT_NAME}
+      - traefik.http.services.work-202110__${PROJECT_NAME}.loadbalancer.server.port=80
 
-      - traefik.http.routers.svc__wordpress_admin.entrypoints=websecure
-      - traefik.http.routers.svc__wordpress_admin.rule=Host(`sampyo-audit.net`)
-        && PathPrefix(`/wp-content/uploads/{year:[0-9]+}/{month:[0-9]+}/`)
-      - traefik.http.routers.svc__wordpress_admin.tls.certresolver=leresolver
-      - traefik.http.routers.svc__wordpress_admin.service=svc__wordpress_admin
-      - traefik.http.services.svc__wordpress_admin.loadbalancer.server.port=80
-      - traefik.http.routers.svc__wordpress_admin.middlewares=favicon@file,
-        wordpress_admin_check@file
-
+      - traefik.http.routers.work-202110__${PROJECT_NAME}_admin.entrypoints=websecure
+      - traefik.http.routers.work-202110__${PROJECT_NAME}_admin.rule=Host(`${PROJECT_NAME}.demo.beeclover.pro`) && PathPrefix(`/wp-content/uploads/{year:[0-9]+}/{month:[0-9]+}/`)
+      - traefik.http.routers.work-202110__${PROJECT_NAME}_admin.tls.certresolver=leresolver
+      - traefik.http.routers.work-202110__${PROJECT_NAME}_admin.service=work-202110__${PROJECT_NAME}_admin
+      - traefik.http.services.work-202110__${PROJECT_NAME}_admin.loadbalancer.server.port=80
+      - traefik.http.routers.work-202110__${PROJECT_NAME}_admin.middlewares=favicon@file, wordpress_admin_check@file
   db:
     image: mariadb
-    container_name: DB__work
     restart: always
-    ports:
-      - 3306
     environment:
       MYSQL_DATABASE: wp
-      MARIADB_ROOT_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${WORDPRESS_DB_PASSWORD}
     volumes:
-      - ./mysql:/var/lib/mysql
-
-  phpmyadmin:
-    image: phpmyadmin
-    container_name: DB__phpmyadmin
-    restart: always
-    labels:
-      - traefik.enable=true
-      ## HTTP Routers
-      - traefik.http.routers.svc__phpmyadmin.rule=Host(`phpmyadmin.${PROJECT_NAME}.beeclover.pro`)
-      - traefik.http.routers.svc__phpmyadmin.entrypoints=web
-      - traefik.http.routers.svc__phpmyadmin.entrypoints=websecure
-      - traefik.http.routers.svc__phpmyadmin.tls.certresolver=leresolver
-      ## Service
-      - traefik.http.services.svc__phpmyadmin.loadbalancer.server.port=80
+      - ./.db:/var/lib/mysql
 
   redis:
-    container_name: DB__redis
     image: redis:latest
     volumes:
       - redis:/data
 
-  traefik:
-    image: traefik:v2.4
-    container_name: DO__traefik
-    restart: unless-stopped
-    ports:
-      - target: 80
-        published: 80
-        protocol: tcp
-        mode: host
-      - target: 443
-        published: 443
-        protocol: tcp
-        mode: host
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config/traefik/rules:/rules
-      - ./config/traefik/acme:/acme
-      - ./config/traefik/traefik.yaml:/etc/traefik/traefik.yaml
-    labels:
-      - traefik.enable=true
-      ## HTTP Routers
-      - traefik.http.routers.svc__traefik.rule=Host(`traefik.${PROJECT_NAME}.beeclover.pro`)
-      - traefik.http.routers.svc__traefik.entrypoints=web
-      - traefik.http.routers.svc__traefik.entrypoints=websecure
-      - traefik.http.routers.svc__traefik.tls.certresolver=leresolver
-      ## Service
-      - traefik.http.services.svc__traefik.loadbalancer.server.port=8080
-
+########################### NETWORKS
+networks:
+  traefik_proxy:
+    external: true
+  WORK:
+    external: true
 volumes:
-  wordpress: null
   redis: null
