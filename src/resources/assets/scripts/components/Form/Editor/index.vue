@@ -5,6 +5,7 @@
     method="post"
     enctype="multipart/form-data"
     class="text-[14px]"
+    @submit="onSumbit($event)"
   >
     <input type="hidden" name="ispost" value="1" />
     <input type="hidden" name="userid" value="" />
@@ -422,14 +423,19 @@
             등록을 완료하시겠습니까?
           </p>
         </div>
-        <div class="grid grid-cols-2 gap-x-[5px]">
-          <input
-            type="submit"
-            class="btn-lochmara py-[15px] cursor-pointer"
-            value="확인"
-            name="submitpost"
-          />
-          <button class="btn py-[15px]" @click.prevent="cancel">취소</button>
+        <div>
+          <div v-if="wipSubmit" class="flex justify-center items-center">
+            <LoadingBar />
+          </div>
+          <div v-else class="grid grid-cols-2 gap-x-[5px]">
+            <input
+              type="submit"
+              class="btn-lochmara py-[15px] cursor-pointer"
+              value="확인"
+              name="submitpost"
+            />
+            <button class="btn py-[15px]" @click.prevent="cancel">취소</button>
+          </div>
         </div>
       </div>
     </div>
@@ -442,12 +448,14 @@ import { Editor, EditorContent } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
 import fileUpload from './fileUpload.vue';
 import { directive } from 'vue3-click-away';
+import LoadingBar from './LoadingBar.vue';
 
 export default {
   name: 'Editor',
   components: {
     EditorContent,
     fileUpload,
+    LoadingBar,
   },
 
   data() {
@@ -497,8 +505,12 @@ export default {
       window.bodyScrollLock(false);
     },
     onClickAway() {
+      if (this.wipSubmit) return;
       this.checkSubmit = false;
       window.bodyScrollLock(false);
+    },
+    onSumbit(e) {
+      this.wipSubmit = true;
     },
   },
 };
