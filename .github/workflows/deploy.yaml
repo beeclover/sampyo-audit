@@ -38,7 +38,6 @@ jobs:
       - name: 🔨 yarn install & build
         run: |
           cd ${{ secrets.SRC }}
-          yarn set version berry
           yarn install
           yarn build
 
